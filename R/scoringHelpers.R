@@ -24,6 +24,7 @@ addScores2Questionnaire <- function(input, questionnaire) {
   })
   
   reactive({
+    validate(need(!has_element(q_values(),numeric(0)),message="Please complete the questionnaire or upload a completed questionnaire file to view your results."))
     cbind(
       questionnaire,
       Chosen_value = q_values()[sort(names(q_values()))], 

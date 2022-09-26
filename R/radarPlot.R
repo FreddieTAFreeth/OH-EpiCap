@@ -138,42 +138,42 @@ setupRadarPlot_results <- function(scoring_table, n_partitions){
   rp <- rp +     #accesses rp from global env, but updates it within function env
     geom_polygon(data=bgPolygons[[1]],mapping = aes(x =x, y = value),linetype=0,
                  fill=scoring_table[1:5,][!is.na(scoring_table$value[1:5]),]$colour[2],
-                 alpha=(scoring_table[1:5,][!is.na(scoring_table$value[1:5]),]$transparency-0.5)[2])+
+                 alpha=0.6)+
     geom_polygon(data=bgPolygons[[2]],mapping = aes(x =x, y = value),linetype=0,
                  fill=scoring_table[6:10,][!is.na(scoring_table$value[6:10]),]$colour[2],
-                 alpha=(scoring_table[6:10,][!is.na(scoring_table$value[6:10]),]$transparency-0.5)[2])+
+                 alpha=0.6)+
     geom_polygon(data=bgPolygons[[3]],mapping = aes(x =x, y = value),linetype=0,
                  fill=scoring_table[11:15,][!is.na(scoring_table$value[11:15]),]$colour[2],
-                 alpha=(scoring_table[11:15,][!is.na(scoring_table$value[11:15]),]$transparency-0.5)[2])+
+                 alpha=0.6)+
   # Adding EU-EpiCap polygons from scoring tables, for 3 partitions (where relevant, 4th partition is added further down)
     geom_polygon_interactive(data = scoring_table[1:5,][!is.na(scoring_table$value[1:5]),],mapping = aes(x =x, y = value),
                              colour = alpha(scoring_table[1:5,][!is.na(scoring_table$value[1:5]),]$colour[2],
                                             alpha=(scoring_table[1:5,][!is.na(scoring_table$value[1:5]),]$transparency-0.3)[2]),
                              fill = scoring_table[1:5,][!is.na(scoring_table$value[1:5]),]$colour[2],
-                             alpha = (scoring_table[1:5,][!is.na(scoring_table$value[1:5]),]$transparency-0.3)[2]) +
+                             alpha = 1) +
     geom_polygon_interactive(data = scoring_table[6:10,][!is.na(scoring_table$value[6:10]),],mapping = aes(x =x, y = value),
                              colour = alpha(scoring_table[6:10,][!is.na(scoring_table$value[6:10]),]$colour[2],
                                             alpha=(scoring_table[6:10,][!is.na(scoring_table$value[6:10]),]$transparency-0.3)[2]),
                              fill = scoring_table[6:10,][!is.na(scoring_table$value[6:10]),]$colour[2],
-                             alpha = (scoring_table[6:10,][!is.na(scoring_table$value[6:10]),]$transparency-0.3)[2]) + 
+                             alpha = 1) + 
     geom_polygon_interactive(data = scoring_table[11:15,][!is.na(scoring_table$value[11:15]),],mapping = aes(x =x, y = value),
                              colour = alpha(scoring_table[11:15,][!is.na(scoring_table$value[11:15]),]$colour[2],
                                             alpha=(scoring_table[11:15,][!is.na(scoring_table$value[11:15]),]$transparency-0.3)[2]), 
                              fill = scoring_table[11:15,][!is.na(scoring_table$value[11:15]),]$colour[2],
-                             alpha = (scoring_table[11:15,][!is.na(scoring_table$value[11:15]),]$transparency-0.3)[2])
+                             alpha = 1)
   
   # Adding background and EU-EpiCap polygons for 4th partition
   if(n_partitions ==4){
     rp <- rp +   #updates rp within function env
       geom_polygon(data=bgPolygons[[4]],mapping = aes(x =x, y = value),linetype=0,
                    fill=scoring_table[16:20,][!is.na(scoring_table$value[16:20]),]$colour[2],
-                   alpha=(scoring_table[16:20,][!is.na(scoring_table$value[16:20]),]$transparency-0.5)[2])+
+                   alpha=0.6)+
       geom_polygon_interactive(data = scoring_table[16:20,][!is.na(scoring_table$value[16:20]),],
                                mapping = aes(x =x, y = value),
                                colour = alpha(scoring_table[16:20,][!is.na(scoring_table$value[16:20]),]$colour[2],
                                               alpha=(scoring_table[16:20,][!is.na(scoring_table$value[16:20]),]$transparency-0.3)[2]),
                                fill = scoring_table[16:20,][!is.na(scoring_table$value[16:20]),]$colour[2],
-                               alpha = (scoring_table[16:20,][!is.na(scoring_table$value[16:20]),]$transparency-0.3)[2])+
+                               alpha = 1)+
       # Changing the scale of the x axis to take into account the 4th partition
       scale_x_continuous(breaks = c(seq(9,81,by=24),seq(99,171,by=24),seq(189,261,by=24),seq(279,351,by=24)), minor_breaks = NULL, labels = NULL)
   }

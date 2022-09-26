@@ -7,16 +7,9 @@ resultsOutput <- function(id, label = "results") {
   
   tagList(
     h2("Results: Visualise your OH-EpiCap profile"),
-    fluidRow(
-      box(width=10,
-          p("This page visually summarises an interactively completed, or uploaded, OH-EpiCap profile.",
-            br(),
-            "This page can also be downloaded in report form by clicking the 'Download report' button to the right.",
-            br(),
-            "The report is in HTML format, and includes interactive visualisations.")
-       ),
-      downloadButton(ns("report"), "Download report",width=2)
-      ),
+    p("This page visually summarises an interactively completed, or uploaded, OH-EpiCap profile. This page can also be downloaded in report form by clicking the 'Download report' button to the right. The report is in HTML format, and includes interactive visualisations."),
+    downloadButton(ns("report"), "Download report",width=2, style="background-color: #EF7933; color:white;"),
+    p(),br(),
     div(id="foo",
       fluidRow(
        box(width=12,
@@ -36,7 +29,7 @@ resultsOutput <- function(id, label = "results") {
         box(width=12,
             title="Targets",
             solidHeader=TRUE, status="info",
-            collapsible=TRUE, collapsed=FALSE,
+            collapsible=TRUE, collapsed=TRUE,
             p("This section shows the results of the twelve targets, divided across the three dimensions.",
               br(),
               "Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial.",
@@ -168,3 +161,5 @@ resultsServer <- function(id, scores_targets=scores_targets, scores_indicators=s
     }
   )    
 }
+
+

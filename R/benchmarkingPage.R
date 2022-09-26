@@ -50,19 +50,20 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
   ns <- NS(id)
   
   tagList(
-    h2("Compare your OH-EpiCap profile with a reference dataset"),
+    h2("Compare Your OH-EpiCap Profile with a Reference Dataset"),
+    p("This page allows the user to visually compare the completed or uploaded OH-EpiCap profile to a selected reference dataset."),
     fluidRow(
       box(width=12,
-          p("This page allows the user to visually compare the completed or uploaded OH-EpiCap profile to a selected reference dataset.")
-      )),
-    fluidRow(
-      box(width=12,
-          title="Reference dataset",
+          title="Reference Dataset",
           solidHeader=TRUE, status="danger",
-          collapsible=TRUE, collapsed=FALSE,
-          fluidRow(column(6, selectInput(inputId = ns("selected_ref"), label = "Please select a reference dataset",choices=c("Select a reference dataset", ref_datasets), selectize=TRUE)),
+          collapsible=FALSE, collapsed=FALSE,
+          fluidRow(column(6, #selectInput(inputId = ns("selected_ref"), label = "Please select a reference dataset",choices=c("Select a reference dataset", ref_datasets), selectize=TRUE)),
+                          fileInput(inputId = ns("selected_ref"), label = "Please select a reference dataset", multiple = FALSE,
+                                    accept = c('text/csv', '.csv', '.rds', 'text/comma-separated-values,text/plain'))
+                   ),
                    column(6, textOutput(ns("bmtxt_refdata"))))
-      )),
+      )
+    ),
     fluidRow(
       box(width=12,
           title="Targets",
@@ -75,7 +76,8 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
                    p("If a data point (filled circle) falls within the coloured area, the target score from the OH-EpiCap profile is within the range of the benchmark target."),
                    uiOutput(ns("bmtxt_targets"))),
                    column(6, girafeOutput(ns("benchmark_all"))))
-      )),
+      )
+    ),
     fluidRow(
       box(width=12,
           title="Dimension 1: Organization",
@@ -88,7 +90,8 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
                    p("If a data point (filled circle) falls within the coloured area, the indicator score from the OH-EpiCap profile is within the range of the benchmark target."),
                    uiOutput(ns("bmtxt_dim1"))),
             column(6, girafeOutput(ns("benchmark_1"))))
-      )),
+      )
+    ),
     fluidRow(
       box(width=12,
           title="Dimension 2: Operations",
@@ -101,7 +104,8 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
                    p("If a data point (filled circle) falls within the coloured area, the indicator score from the OH-EpiCap profile is within the range of the benchmark target."),                   
                    uiOutput(ns("bmtxt_dim2"))),
             column(6, girafeOutput(ns("benchmark_2"))))
-      )),
+      )
+    ),
     fluidRow(
       box(width=12,
           title="Dimension 3: Impact",
@@ -114,7 +118,8 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
                    p("If a data point (filled circle) falls within the coloured area, the indicator score from the OH-EpiCap profile is within the range of the benchmark target."),                   
                    uiOutput(ns("bmtxt_dim3"))),
             column(6, girafeOutput(ns("benchmark_3"))))
-      )),
+      )
+    ),
   )
 }
 
@@ -124,31 +129,45 @@ benchmarkServer <- function(id, scores_targets=scores_targets, scores_indicators
     id,
     ## Below is the module function
     function(input, output, session) {
+    
       #read in reference scoring tables
-      selected_ref_files<-reactive({ref_files[which(str_detect(ref_files,input$selected_ref))]})
-      ref_targets<-reactive({read.csv(paste0("data/reference_datasets/",as.character(selected_ref_files()[which(str_detect(ref_files,"STtargets"))])))})
-      ref_indic<-reactive({read.csv(paste0("data/reference_datasets/",as.character(selected_ref_files()[which(str_detect(ref_files,"STindicators"))])))})
+      selected_ref_files <- reactive({
+        validate(need(!is.null(input$selected_ref$datapath), message = "Please select a benchmark file."))
+        #ref_files[which(str_detect(ref_files, input$selected_ref))]
+        return(as.character(input$selected_ref[[1]]))
+      })
+      ref_targets <- reactive({
+        #read.csv(paste0("data/reference_datasets/",as.character(selected_ref_files()[which(str_detect(ref_files,"STtargets"))])))
+        read.csv(paste0("data/reference_datasets/",selected_ref_files,"STtargets"))
+      })
+      ref_indic <- reactive({
+        #read.csv(paste0("data/reference_datasets/",as.character(selected_ref_files()[which(str_detect(ref_files,"STindicators"))])))
+        read.csv(paste0("data/reference_datasets/",selected_ref_files,"STindicators"))
+      })
+      
       #generate radarcharts
       output$benchmark_all <- renderGirafe(makeRadarPlot_benchmark(scores_targets(),3,ref_targets()))
       output$benchmark_1 <- renderGirafe(makeRadarPlot_benchmark(scores_indicators()[1:20,],4,ref_indic()[1:16,]))
       output$benchmark_2 <- renderGirafe(makeRadarPlot_benchmark(scores_indicators()[21:40,],4,ref_indic()[17:32,]))
       output$benchmark_3 <- renderGirafe(makeRadarPlot_benchmark(scores_indicators()[41:60,],4,ref_indic()[33:48,]))
+      
       #lists of targets/indicators with low scores
       source("R/scoringHelpers.R")
-      targets_low<-id_low_scores(scores_targets(),ref_targets()$low)
-      targets_high<-id_high_scores(scores_targets(),ref_targets()$high)
-      dim1_low<-id_low_scores(scores_indicators()[1:20,],ref_indic()[1:16,]$low)
-      dim1_high<-id_high_scores(scores_indicators()[1:20,],ref_indic()[1:16,]$high)
-      dim2_low<-id_low_scores(scores_indicators()[21:40,],ref_indic()[17:32,]$low)
-      dim2_high<-id_high_scores(scores_indicators()[21:40,],ref_indic()[17:32,]$high)
-      dim3_low<-id_low_scores(scores_indicators()[41:60,],ref_indic()[33:48,]$low)
-      dim3_high<-id_high_scores(scores_indicators()[41:60,],ref_indic()[33:48,]$high)
+      targets_low <- id_low_scores(scores_targets(),ref_targets()$low)
+      targets_high <- id_high_scores(scores_targets(),ref_targets()$high)
+      dim1_low <- id_low_scores(scores_indicators()[1:20,],ref_indic()[1:16,]$low)
+      dim1_high <- id_high_scores(scores_indicators()[1:20,],ref_indic()[1:16,]$high)
+      dim2_low <- id_low_scores(scores_indicators()[21:40,],ref_indic()[17:32,]$low)
+      dim2_high <- id_high_scores(scores_indicators()[21:40,],ref_indic()[17:32,]$high)
+      dim3_low <- id_low_scores(scores_indicators()[41:60,],ref_indic()[33:48,]$low)
+      dim3_high <- id_high_scores(scores_indicators()[41:60,],ref_indic()[33:48,]$high)
+      
       #generate benchmark texts
       output$bmtxt_refdata <- renderText({"Sample text describing the reference dataset"})
-      output$bmtxt_targets <- renderUI({HTML(paste0("Targets exceeding the benchmark range, are: ",targets_high(),".<br><br>Targets falling below the benchmark range, are: ",targets_low(),"."))})
-      output$bmtxt_dim1 <- renderUI({HTML(paste0("Indicators exceeding the benchmark range, are: ",dim1_high(),".<br><br>Indicators falling below the benchmark range, are: ",dim1_low(),"."))})
-      output$bmtxt_dim2 <- renderUI({HTML(paste0("Indicators exceeding the benchmark range, are: ",dim2_high(),".<br><br>Indicators falling below the benchmark range, are: ",dim2_low(),"."))})
-      output$bmtxt_dim3 <- renderUI({HTML(paste0("Indicators exceeding the benchmark range, are: ",dim3_high(),".<br><br>Indicators falling below the benchmark range, are: ",dim3_low(),"."))})
+      output$bmtxt_targets <- renderUI({HTML(paste0("Targets exceeding the benchmark range, are: <b>",targets_high(),"</b>.<br><br>Targets falling below the benchmark range, are: <b>",targets_low(),"</b>."))})
+      output$bmtxt_dim1 <- renderUI({HTML(paste0("Indicators exceeding the benchmark range, are: <b>",dim1_high(),"</b>.<br><br>Indicators falling below the benchmark range, are: <b>",dim1_low(),"</b>."))})
+      output$bmtxt_dim2 <- renderUI({HTML(paste0("Indicators exceeding the benchmark range, are: <b>",dim2_high(),"</b>.<br><br>Indicators falling below the benchmark range, are: <b>",dim2_low(),"</b>."))})
+      output$bmtxt_dim3 <- renderUI({HTML(paste0("Indicators exceeding the benchmark range, are: <b>",dim3_high(),"</b>.<br><br>Indicators falling below the benchmark range, are: <b>",dim3_low(),"</b>."))})
       }
   )    
 }

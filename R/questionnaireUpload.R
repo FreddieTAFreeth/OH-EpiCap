@@ -41,7 +41,7 @@ questionnaireUploadServer <- function(id, stringsAsFactors) {
         })
 
       # Some output is required to allow the display of the error msg in case of wrong file format
-      # This can also display a message upon succesful upload (or could check data format and send people to next page)
+      # This can also display a message upon successful upload (or could check data format and send people to next page)
       output$msg<-renderUI(
         HTML(       # renderUI with HTML, to allow for correct display of text with new lines
           paste(paste0("File ",userFile()$name, " was successfully uploaded."),

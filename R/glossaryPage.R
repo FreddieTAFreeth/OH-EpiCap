@@ -2,7 +2,7 @@
 glossaryOutput <- function() {
   tagList(
     h2("Glossary"),
-    fluidRow(box(width=10, p("This page provides definitions for the most relevant terms used within the OH-EpiCap tool"))),
+    p("This page provides definitions for the most relevant terms used within the OH-EpiCap tool"),
     p(tags$b("Actor:"),"An individual or organization that operates with a primary intent to improve health of people, animals and the environment."),
     p(tags$b("Central/Intermediate/Field levels"),a(href="#Dufour","(Dufour et al., 2009)"),tags$b(":"),
       tags$ul(

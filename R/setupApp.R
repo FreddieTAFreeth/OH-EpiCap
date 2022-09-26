@@ -15,7 +15,7 @@ setupApp <- function(questionnaire_file){
   # Setup for benchmarking ------------------------------------------------------------
   
   #Identify available reference datasets (for use in benchmarking dropdown menu)
-  ref_files<<-list.files("data/reference_datasets", pattern=".+_ST.+")
-  ref_datasets<<-unique(sub(pattern = "_ST.+",replacement="",ref_files))
+  #ref_files<<-list.files("data/reference_datasets", pattern=".+_ST.+")
+  #ref_datasets<<-unique(sub(pattern = "_ST.+",replacement="",ref_files))
   
 }
