@@ -17,7 +17,7 @@ questionnaireDownloadServer <- function(id, stringsAsFactors, inputlist) {
       
       #save as .Rds
       output$saveRds <- downloadHandler(
-        filename = "questionnaire_answers.rds", #can make this depend on prelim questions?
+        filename = "questionnaire_answers.rds", # can make this depend on prelim questions?
         content = function(file){
           saveRDS(inputlist(), file)
         }

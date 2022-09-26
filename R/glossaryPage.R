@@ -38,7 +38,7 @@ glossaryOutput <- function() {
     div(id="Toma",p("Toma B, Bénet J-J, Dufour B, Eloit M, Moutou F, Sanaa M. Glossaire d’épidémiologie animale. Le Point vétérinaire, Maisons-Alfort. 1991; 365.")),
     div(id="Wilkinson",p("Wilkinson, M.D., Dumontier, M., Aalbersberg, I.J., Appleton, G., Axton, M., Baak, A., Blomberg, N., Boiten, J.W., da Silva Santos, L.B., Bourne, P.E., Bouwman, J., et al. 2016. The FAIR Guiding Principles for scientific data management and stewardship. Scientific data, 3(1), 1-9.")),
     div(id="WHO",p("World Health Organization (2021). Expert consultation on public health needs related to surveillance of SARS-CoV-2 in wastewater: summary report: virtual meeting, 30 November 2020 (No. WHO/EURO: 2021-1965-41716-57097). World Health Organization. Regional Office for Europe."))
-    )
+    ) 
 }
 
   

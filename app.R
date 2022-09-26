@@ -310,7 +310,9 @@ ui <- dashboardPage(
                               accept = c('text/csv', '.csv', '.rds', 'text/comma-separated-values,text/plain')
                     ),
                     uiOutput("questionnaireFileViewer"),
-                    downloadButton(outputId = 'createdBenchmark', 'Download your benchmark file'),
+                    conditionalPanel(condition="output.questionnaireFileViewer",
+                                     downloadButton(outputId = 'createdBenchmark', 'Download your benchmark file'),
+                    )
             ),
             tabItem(tabName = "benchmark", benchmarkUI("benchmarkPage", ref_datasets = ref_datasets)),
             tabItem(tabName = "glossary", glossaryOutput()),
@@ -339,7 +341,21 @@ server <- function(input, output, session) {
         inFiles <- lapply(input$questionnaireFiles$datapath, fread)
         
         # Setup data structures.
-        questionNums <- sort(inFiles[[1]][which(grepl("Q", inFiles[[1]][[1]]))][[1]])
+        questionNums <- c("Q1.1.1", "Q1.1.2", "Q1.1.3", "Q1.1.4",
+                          "Q1.2.1", "Q1.2.2", "Q1.2.3", "Q1.2.4",
+                          "Q1.3.1", "Q1.3.2", "Q1.3.3", "Q1.3.4",
+                          "Q1.4.1", "Q1.4.2", "Q1.4.3", "Q1.4.4",
+                           
+                          "Q2.1.1", "Q2.1.2", "Q2.1.3", "Q2.1.4",
+                          "Q2.2.1", "Q2.2.2", "Q2.2.3", "Q2.2.4",
+                          "Q2.3.1", "Q2.3.2", "Q2.3.3", "Q2.3.4",
+                          "Q2.4.1", "Q2.4.2", "Q2.4.3", "Q2.4.4",
+                           
+                          "Q3.1.1", "Q3.1.2", "Q3.1.3", "Q3.1.4",
+                          "Q3.2.1", "Q3.2.2", "Q3.2.3", "Q3.2.4",
+                          "Q3.3.1", "Q3.3.2", "Q3.3.3", "Q3.3.4",
+                          "Q3.4.1", "Q3.4.2", "Q3.4.3", "Q3.4.4")
+        
         newBenchmark <- as.data.frame(matrix(0, nrow = length(questionNums), ncol = 4))
         colnames(newBenchmark) <- c("Question", "Value", "Low", "High")
         newBenchmark[,1] <- questionNums
@@ -391,36 +407,55 @@ server <- function(input, output, session) {
     output$questionnaireFileViewer <- renderUI({
       inFiles <- lapply(input$questionnaireFiles$datapath, fread)
       validate(need(!is.null(input$questionnaireFiles), message="Please upload your questionnaire file(s). You will see your uploaded files here."))
-        
-      # Check if all files are completed:
+      
+      # Check if all files are completed and if they have the right dimension:
+      unsuitableFileNums <- rep(0, length(inFiles)) # Assume all files are suitable
       incompleteFileNums <- rep(0, length(inFiles)) # Assume all files are complete
       for(i in 1:length(inFiles)){
-        # Locate which files have incomplete questions. NULL is saved as "NULL" in Questionnaire.
-        if("NULL" %in% inFiles[[i]][which(grepl("Q", inFiles[[1]][[1]]))][[2]]){
+        
+        # Locate which files have incorrect dimension and entries. We expect these files to contain
+        # two columns, one with 'Question' and another with 'Value' with each value being one of 
+        # a string of NULL, NA, 1, 2, 3, or 4.
+        if(FALSE %in% c(nrow(inFiles[[i]]) == 96, ncol(inFiles[[i]]) == 2,
+           all(inFiles[[i]][which(grepl("Q", inFiles[[i]][[1]]))][[2]] %in% c("NULL", NA, "1", "2", "3", "4")))){
+          unsuitableFileNums[i] = 1
+          # Locate which files have incomplete questions. NULL is saved as "NULL" in Questionnaire.
+        } else if("NULL" %in% inFiles[[i]][which(grepl("Q", inFiles[[i]][[1]]))][[2]]){
           incompleteFileNums[i] = 1
         }
       }
       
-      # Show user which questionnaire files have not been completed.
-      if(sum(incompleteFileNums) != 0){
+      # Show user which questionnaire files have not been completed or are of the wrong format.
+      if(sum(unsuitableFileNums) != 0){
         validate(
-          paste("The following questionnaire file(s) are incomplete: \n",
+          paste("The following questionnaire file(s) do not have the expected format: \n",
+                paste(input$questionnaireFiles[[1]][which(unsuitableFileNums != 0)], collapse="\n"),
+                "\nWe expect there to be two columns; one for the question number, and one for the value. Each question should be labelled one of 'NA', '1', '2', '3' or '4'",
+                "\n", sep = ""
+          )
+        )
+      } else if(sum(incompleteFileNums) != 0){
+        validate(
+          paste("The following questionnaire file(s) have the correct format but are incomplete: \n",
                 paste(input$questionnaireFiles[[1]][which(incompleteFileNums != 0)], collapse="\n"),
-                "\nPlease complete them and try again.",
+                "\nPlease upload them under the Questionnaire tab to complete them and try again.",
                 "\n", sep = ""
           )
         )
       }
+      # Display the successfully uploaded files in a table,
       box(width = 12, solidHeader = TRUE, status = "primary", collapsible = FALSE,
           title = "Uploaded Files",
           tableOutput("fileDirectory")
       )
     })
     
+    outputOptions(output, "questionnaireFileViewer", suspendWhenHidden = FALSE)
+    
     # Download the new benchmark file
     output$createdBenchmark <- downloadHandler(
         filename = function(){paste("Benchmark_File_", Sys.Date(), ".csv", sep="")},
-        content = function(file){write.csv(benchmarkFile(), file, row.names=TRUE)}
+        content = function(file){write.csv(benchmarkFile(), file, row.names=FALSE)}
     )
     # Server logic for Create Benchmark ends here.
     
