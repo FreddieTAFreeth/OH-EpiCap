@@ -169,7 +169,7 @@ ui <- dashboardPage(
         
         tabItems(
             tabItem(tabName = "about",
-                    HTML('<center><a href="https://onehealthejp.eu"><img src="OHEJP_logo.png", style="width:250px;"></a></center>'),
+                    HTML('<center><a href="https://onehealthejp.eu"><img src="OHEJP MATRIX.svg", style="width:250px;"></a></center>'),
                     tags$h1(class="primary-title", "OH-EpiCap Tool"),
                     tags$h3(class="primary-subtitle", "Evaluation tool for One Health epidemiological surveillance capacities and capabilities"),
                     br(),
@@ -303,7 +303,6 @@ ui <- dashboardPage(
                         ),
                         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
                     ),
-                    
                     fileInput(input = "questionnaireFiles",
                               label = "Select completed questionnaire files",
                               multiple = TRUE,
@@ -319,6 +318,11 @@ ui <- dashboardPage(
             tabItem(tabName = "legal",
                     h2("Legal and Funding Information"),
                     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum lectus mauris ultrices eros. Vitae justo eget magna fermentum iaculis eu non. In ornare quam viverra orci sagittis. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo. Ornare aenean euismod elementum nisi quis eleifend quam. Eget est lorem ipsum dolor sit amet. Neque sodales ut etiam sit amet nisl purus in. Vivamus at augue eget arcu dictum varius duis. Id donec ultrices tincidunt arcu non sodales neque sodales ut."),
+                    box(
+                      width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
+                      title = "Funding Statement",
+                      p("The OH-EpiCap tool has received funding, through the One Health EJP, from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 773830.")
+                    ),
                     p("Porttitor eget dolor morbi non arcu risus quis varius quam. Non tellus orci ac auctor augue mauris augue neque. Vel eros donec ac odio tempor orci dapibus. Urna cursus eget nunc scelerisque viverra mauris in aliquam sem. Viverra suspendisse potenti nullam ac tortor vitae. Vel facilisis volutpat est velit egestas dui id ornare arcu. Leo urna molestie at elementum eu facilisis. Purus sit amet volutpat consequat mauris nunc congue nisi. Sem integer vitae justo eget magna fermentum. Aliquam sem fringilla ut morbi tincidunt augue interdum velit euismod. Posuere lorem ipsum dolor sit amet consectetur. Lacinia quis vel eros donec. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Urna molestie at elementum eu facilisis sed odio. Enim sed faucibus turpis in eu mi bibendum neque egestas. Quis viverra nibh cras pulvinar mattis nunc."),
                     p("Dictum varius duis at consectetur lorem donec massa sapien faucibus. Commodo viverra maecenas accumsan lacus vel facilisis volutpat est velit. Velit dignissim sodales ut eu sem integer vitae justo eget. Proin nibh nisl condimentum id venenatis a condimentum. Volutpat est velit egestas dui id ornare arcu odio ut. Molestie at elementum eu facilisis sed odio morbi quis commodo. Commodo sed egestas egestas fringilla phasellus. Sed enim ut sem viverra aliquet eget. Nullam eget felis eget nunc lobortis mattis aliquam faucibus. Fringilla est ullamcorper eget nulla facilisi etiam. Rutrum tellus pellentesque eu tincidunt. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget egestas. Risus nec feugiat in fermentum posuere urna nec tincidunt praesent. In fermentum posuere urna nec tincidunt praesent. Nullam eget felis eget nunc lobortis mattis aliquam."),
                     p("Pellentesque massa placerat duis ultricies lacus. Eget arcu dictum varius duis. Pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper. Ac felis donec et odio pellentesque diam volutpat. Dignissim suspendisse in est ante in. Id velit ut tortor pretium. Fermentum et sollicitudin ac orci. Enim tortor at auctor urna nunc id. Cras pulvinar mattis nunc sed blandit. Auctor augue mauris augue neque gravida in. Aenean euismod elementum nisi quis eleifend quam adipiscing vitae proin. Est lorem ipsum dolor sit amet consectetur adipiscing elit. Cursus euismod quis viverra nibh cras pulvinar mattis nunc. Nam at lectus urna duis convallis convallis tellus. Egestas purus viverra accumsan in. Fermentum dui faucibus in ornare quam viverra orci sagittis."),
@@ -430,7 +434,7 @@ server <- function(input, output, session) {
         validate(
           paste("The following questionnaire file(s) do not have the expected format: \n",
                 paste(input$questionnaireFiles[[1]][which(unsuitableFileNums != 0)], collapse="\n"),
-                "\nWe expect there to be two columns; one for the question number, and one for the value. Each question should be labelled one of 'NA', '1', '2', '3' or '4'",
+                "\nWe expect there to be two columns; one for the question number, and one for the value. Each value should be one of 'NA', '1', '2', '3' or '4'",
                 "\n", sep = ""
           )
         )

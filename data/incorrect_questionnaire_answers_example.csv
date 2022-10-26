@@ -1,97 +1,97 @@
-Question,Value
-Q1.4.1,1
-Q1.3.4,2
-Q2.1.4,3
-Q2.2.1,1
-Q1.2.2,NA
-Q1.4.2,4
-Q1.3.2,4
-Q3.2.3,3
-Q2.3.1,4
-Q3.2.1,2
-Q2.1.2,5
-Q1.2.4,3
-Q2.2.2,3
-Q1.3.1,3
-Q2.4.3,4
-Q3.1.3,3
-Q3.4.4,4
-Q3.3.1,2
-Q2.3.2,1
-Q1.1.1,1
-Q1.1.2,NA
-Q3.3.3,1
-Q2.3.3,1
-Q3.2.2,2
-Q2.2.3,NA
-Q2.4.2,4
-Q3.1.1,3
-Q1.4.3,NA
-Q2.1.3,2
-Q3.3.2,1
-Q1.3.3,4
-Q3.4.1,1
-Q2.3.4,2
-Q3.3.4,2
-Q3.4.3,2
-Q2.4.4,2
-Q3.1.2,3
-Q3.2.4,NA
-Q2.2.4,4
-Q1.2.3,1
-Q1.2.1,3
-Q3.1.4,2
-Q2.4.1,NA
-Q2.1.1,2
-Q1.1.3,2
-Q1.4.4,2
-Q1.1.4,4
-Q3.4.2,4
-C2.1.4,Comment 214
-C2.2.1,Comment 221
-C3.4.1,Comment 341
-C3.4.3,Comment 343
-C3.3.1,Comment 331
-C1.2.1,Comment 121
-C3.2.4,Comment 324
-C1.3.4,Comment 134
-C1.4.2,Comment 142
-C1.2.3,Comment 123
-C2.4.3,Comment 243
-C1.1.2,Comment 112
-C1.1.1,Comment 111
-C1.2.2,Comment 122
-C2.3.4,Comment 234
-C3.4.2,Comment 342
-C3.3.4,Comment 334
-C1.3.3,Comment 133
-C2.4.1,Comment 241
-C1.1.3,Comment 113
-C1.1.4,Comment 114
-C1.4.1,Comment 141
-C2.3.1,Comment 231
-C3.2.3,Comment 323
-C1.3.1,Comment 131
-C2.1.3,Comment 213
-C2.2.3,Comment 223
-C3.1.1,Comment 311
-C3.3.3,Comment 333
-C2.3.2,Comment 232
-C1.4.3,Comment 143
-C3.1.4,Comment 314
-C2.3.3,Comment 233
-C3.2.1,Comment 321
-C1.4.4,Comment 144
-C3.3.2,Comment 332
-C1.3.2,Comment 132
-C2.2.4,Comment 224
-C1.2.4,Comment 124
-C3.2.2,Comment 322
-C2.1.2,Comment 212
-C2.4.2,Comment 242
-C2.2.2,Comment 222
-C3.1.2,Comment 312
-C2.4.4,Comment 244
-C3.4.4,Comment 344
-C3.1.3,Comment 313
-C2.1.1,Comment 211
+Question,Value,Wrong
+Q1.4.1,1,1
+Q1.3.4,2,2
+Q2.1.4,3,3
+Q2.2.1,1,4
+Q1.2.2,NA,5
+Q1.4.2,4,5
+Q1.3.2,4,7
+Q3.2.3,3,5
+Q2.3.1,4,4
+Q3.2.1,2,3
+Q2.1.2,5,4
+Q1.2.4,3,5
+Q2.2.2,3,6
+Q1.3.1,3,7
+Q2.4.3,4,8
+Q3.1.3,3,9
+Q3.4.4,4,7
+Q3.3.1,2,1
+Q2.3.2,1,5
+Q1.1.1,1,4
+Q1.1.2,NA,5
+Q3.3.3,1,6
+Q2.3.3,1,5
+Q3.2.2,2,3
+Q2.2.3,NA,5
+Q2.4.2,4,6
+Q3.1.1,3,7
+Q1.4.3,NA,8
+Q2.1.3,2,9
+Q3.3.2,1,0
+Q1.3.3,4,9
+Q3.4.1,1,8
+Q2.3.4,2,7
+Q3.3.4,2,6
+Q3.4.3,2,5
+Q2.4.4,2,4
+Q3.1.2,3,3
+Q3.2.4,NA,21
+Q2.2.4,4,2
+Q1.2.3,1,3
+Q1.2.1,3,5
+Q3.1.4,2,6
+Q2.4.1,NA,7
+Q2.1.1,2,8
+Q1.1.3,2,9
+Q1.4.4,2,0
+Q1.1.4,4,54
+Q3.4.2,4,54
+C2.1.4,Comment 214,5
+C2.2.1,Comment 221,44
+C3.4.1,Comment 341,44
+C3.4.3,Comment 343,
+C3.3.1,Comment 331,5
+C1.2.1,Comment 121,5
+C3.2.4,Comment 324,6
+C1.3.4,Comment 134,6
+C1.4.2,Comment 142,66
+C1.2.3,Comment 123,4
+C2.4.3,Comment 243,4
+C1.1.2,Comment 112,4
+C1.1.1,Comment 111,34
+C1.2.2,Comment 122,3
+C2.3.4,Comment 234,3
+C3.4.2,Comment 342,3
+C3.3.4,Comment 334,3
+C1.3.3,Comment 133,3
+C2.4.1,Comment 241,3
+C1.1.3,Comment 113,3
+C1.1.4,Comment 114,3
+C1.4.1,Comment 141,3
+C2.3.1,Comment 231,3
+C3.2.3,Comment 323,3
+C1.3.1,Comment 131,3
+C2.1.3,Comment 213,3
+C2.2.3,Comment 223,3
+C3.1.1,Comment 311,3
+C3.3.3,Comment 333,3
+C2.3.2,Comment 232,3
+C1.4.3,Comment 143,3
+C3.1.4,Comment 314,3
+C2.3.3,Comment 233,3
+C3.2.1,Comment 321,3
+C1.4.4,Comment 144,3
+C3.3.2,Comment 332,3
+C1.3.2,Comment 132,3
+C2.2.4,Comment 224,3
+C1.2.4,Comment 124,3
+C3.2.2,Comment 322,3
+C2.1.2,Comment 212,3
+C2.4.2,Comment 242,3
+C2.2.2,Comment 222,3
+C3.1.2,Comment 312,3
+C2.4.4,Comment 244,3
+C3.4.4,Comment 344,3
+C3.1.3,Comment 313,3
+C2.1.1,Comment 211,3

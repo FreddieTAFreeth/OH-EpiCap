@@ -4,7 +4,7 @@ questionnaireDownloadUI <- function(id, label = "download") {
   ns <- NS(id)
   
   tagList(
-    downloadButton(ns("saveRds"), "Save questionnaire answers as .rds"),
+    #downloadButton(ns("saveRds"), "Save questionnaire answers as .rds"),
     downloadButton(ns("saveCsv"), "Save questionnaire answers as .csv")
   )
 }
@@ -16,12 +16,12 @@ questionnaireDownloadServer <- function(id, stringsAsFactors, inputlist) {
     function(input, output, session) {
       
       #save as .Rds
-      output$saveRds <- downloadHandler(
-        filename = "questionnaire_answers.rds", # can make this depend on prelim questions?
-        content = function(file){
-          saveRDS(inputlist(), file)
-        }
-      )
+      #output$saveRds <- downloadHandler(
+      #  filename = "questionnaire_answers.rds", # can make this depend on prelim questions?
+      #  content = function(file){
+      #    saveRDS(inputlist(), file)
+      #  }
+      #)
       
       #save as .csv
       output$saveCsv <- downloadHandler(
