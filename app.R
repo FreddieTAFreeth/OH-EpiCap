@@ -243,7 +243,7 @@ ui <- dashboardPage(
                           tags$li(tags$b("Target 1.1 Formalization"),"includes questions about the objectives, supporting documentation, coordination roles, and leadership in the OH surveillance system."),
                           tags$li(tags$b("Target 1.2 Coverage"), "addresses whether the surveillance covers all relevant actors, disciplines, sectors, geography, populations, and hazards."),
                           tags$li(tags$b("Target 1.3 Resources"), "addresses questions linked to the availability of financial and human resources, training, and sharing of the available operational resources."),
-                          tags$li(tags$b("Target 1.4 Evaluation and resilience"), "focuses on internal and external evaluation, implementation of corrective measures, and the capacity of the OH surveillance system to adapt to changes.")
+                          tags$li(tags$b("Target 1.4 Evaluation and Resilience"), "focuses on internal and external evaluation, implementation of corrective measures, and the capacity of the OH surveillance system to adapt to changes.")
                         ),
                     ),
                     buildQuestionnaireUI(commands[commands$Dimension=='Dimension 1: Organization',])
