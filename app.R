@@ -15,7 +15,6 @@ if(!require("ggiraph")){install.packages("ggiraph"); library(ggiraph)}
 if(!require("ggmulti")){install.packages("ggmulti"); library(ggmulti)}
 if(!require("bslib")){install.packages("bslib"); library(bslib)}
 if(!require("data.table")){install.packages("data.table"); library(data.table)}
- 
 
 # Change encoding to UTF-8
 options(encoding="UTF-8") 
@@ -279,8 +278,9 @@ ui <- dashboardPage(
             ),
             tabItem(tabName = "upload",
                     h2("Upload questionnaire answers from file"),
-                    p("Previously saved questionnaire answers, such as from a partially completed questionnaire, can be uploaded from file here. This allows the user to revisit or complete their answers, via the relevant Dimension pages. If the uploaded questionnaire is complete, results can also be visualised on the 'Results' page."),
-                    questionnaireUploadUI("datafile", "Upload saved OH-EpiCap answers (.csv or .rds format)"),
+                    p("Previously saved questionnaire answers, such as from a partially completed questionnaire, can be uploaded from file here. This allows the user to revisit or complete their answers, via the relevant Dimension pages. If the uploaded questionnaire is complete, results can also be visualised on the 'Results' page. Note that files not encoded in UTF-8, i.e. containing special characters, may cause unexpected behaviour."),
+                    #questionnaireUploadUI("datafile", "Upload saved OH-EpiCap answers (.csv or .rds format)"),
+                    questionnaireUploadUI("datafile", "Upload saved OH-EpiCap answers (.csv format)"),
             ),
             tabItem(tabName = "download",
                     h2("Save Questionnaire Answers to File"),
@@ -459,7 +459,9 @@ server <- function(input, output, session) {
     # Download the new benchmark file
     output$createdBenchmark <- downloadHandler(
         filename = function(){paste("Benchmark_File_", Sys.Date(), ".csv", sep="")},
-        content = function(file){write.csv(benchmarkFile(), file, row.names=FALSE)}
+        content = function(file){
+          write.csv(benchmarkFile(), file, row.names=FALSE, fileEncoding = "UTF-8") # Forces UTF-8 encoding.
+        }
     )
     # Server logic for Create Benchmark ends here.
     
