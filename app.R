@@ -35,21 +35,21 @@ ui <- dashboardPage(
             #menuItem("Your Surveillance Network", tabName = "network", icon = icon("project-diagram")),
             menuItem("Instructions", tabName = "instructions", icon = icon("person-chalkboard")),
             menuItem("Questionnaire", tabName = "questionnaire", icon = icon("file-alt"),
-                     convertMenuItem(menuItem("Dimension 1: Organization", tabName = "organization",
-                              menuSubItem("Target 1.1", href="#T1.1",newtab=FALSE),
-                              menuSubItem("Target 1.2", href="#T1.2",newtab=FALSE),
-                              menuSubItem("Target 1.3", href="#T1.3",newtab=FALSE),
-                              menuSubItem("Target 1.4", href="#T1.4",newtab=FALSE)),"organization"),
-                     convertMenuItem(menuItem("Dimension 2: Operations", tabName = "operations",
-                              menuSubItem("Target 2.1", href="#T2.1",newtab=FALSE),
-                              menuSubItem("Target 2.2", href="#T2.2",newtab=FALSE),
-                              menuSubItem("Target 2.3", href="#T2.3",newtab=FALSE),
-                              menuSubItem("Target 2.4", href="#T2.4",newtab=FALSE)),"operations"),
-                     convertMenuItem(menuItem("Dimension 3: Impact", tabName = "impact",
-                              menuSubItem("Target 3.1", href="#T3.1",newtab=FALSE),
-                              menuSubItem("Target 3.2", href="#T3.2",newtab=FALSE),
-                              menuSubItem("Target 3.3", href="#T3.3",newtab=FALSE),
-                              menuSubItem("Target 3.4", href="#T3.4",newtab=FALSE)),"impact"),
+                     convertMenuItem(menuItem("Organization", tabName = "organization",
+                              menuSubItem("Formalisation", href="#T1.1",newtab=FALSE),
+                              menuSubItem("Coverage", href="#T1.2",newtab=FALSE),
+                              menuSubItem("Resources", href="#T1.3",newtab=FALSE),
+                              menuSubItem("Evaluation and Resiliance", href="#T1.4",newtab=FALSE)),"organization"),
+                     convertMenuItem(menuItem("Operations", tabName = "operations",
+                              menuSubItem("Data Collection and Methods Sharing", href="#T2.1",newtab=FALSE),
+                              menuSubItem("Data Sharing", href="#T2.2",newtab=FALSE),
+                              menuSubItem("Data Analysis and Interpretation", href="#T2.3",newtab=FALSE),
+                              menuSubItem("Communication", href="#T2.4",newtab=FALSE)),"operations"),
+                     convertMenuItem(menuItem("Impact", tabName = "impact",
+                              menuSubItem("Technical Outputs", href="#T3.1",newtab=FALSE),
+                              menuSubItem("Collaborative Added Value", href="#T3.2",newtab=FALSE),
+                              menuSubItem("Immediate and Intermediate Outcomes", href="#T3.3",newtab=FALSE),
+                              menuSubItem("Ultimate Outcomes", href="#T3.4",newtab=FALSE)),"impact"),
                      menuItem("Upload answers from file", tabName = "upload"),
                      menuItem("Save answers to file", tabName = "download")
             ),
@@ -60,14 +60,11 @@ ui <- dashboardPage(
             menuItem("Legal Information", tabName = "legal", icon=icon("gavel")),
             box(width = 12, solidHeader = TRUE, status = "danger", collapsible = FALSE, background = "red", height="auto",
                 title = "Important Disclaimer:",
-                p("All of the data entered in"),
-                p("this tool is processed on"),
-                p("your device and is not"),
-                p("processed externally.")
+                p("All of the data entered in this tool is processed on your device and is not sent externally.")
             )
         )
     ),
-    
+
 # UI - Header CSS ---------------------------------------------------------------
 
     dashboardBody(
@@ -126,6 +123,12 @@ ui <- dashboardPage(
                 width: 50%;
             }
             
+            /* Wrapping long text in red disclaimer box */
+            .sidebar-menu {
+                white-space: normal!important;
+                overflow: hidden;
+                text-align: left;
+            }
             
             /* Fixing sidebar logo area in place*/
             .skin-blue .main-header .logo{
