@@ -1,7 +1,7 @@
 <a href="url"><img src="https://user-images.githubusercontent.com/114069006/198340864-5b46c98a-d8b8-4e1d-80b3-8f7e330b290b.svg" align="left" height="150"></br></a>
 
 # OH-EpiCap
-Link to the tool: [https://freddietafreeth.shinyapps.io/OH-EpiCap//](https://freddietafreeth.shinyapps.io/OH-EpiCap/)
+Link to the tool: [https://freddietafreeth.shinyapps.io/OH-EpiCap/](https://freddietafreeth.shinyapps.io/OH-EpiCap/)
 
 **OH-EpiCap Tool: Evaluation tool for One Health Epidemiological Surveillance Capacities and Capabilities**.
 
