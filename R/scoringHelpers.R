@@ -36,8 +36,6 @@ addScores2Questionnaire <- function(input, questionnaire) {
 
 # scoringTable ------------------------------------------------------------
 
-# Need to fix so generates either a plot or an informative error message when questions not completed!
-
 # This function creates scoring tables for use in plotting.
 # If level = "targets", it summarises the questionnaire df by target: it sums the scores, and generates tooltip texts with score breakdowns
 # If level = "indicators", it shows indicator values, and generates tooltip texts that correspond to the selected questionnaire option + any comments
@@ -54,7 +52,9 @@ scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
       mutate(variable = Indicators,
              value = Chosen_value,
              x=rep(c(seq(9,81,24),seq(99,171,24),seq(189,261,24),seq(279,351,24)),3),
-             tooltip = paste0(str_match(Options,paste(Chosen_value,'\\. *([^"]+)\\"',sep=''))[,2],'\n',Comment),
+             tooltip = ifelse(reference == FALSE,
+                              paste0(str_match(Options,paste(Chosen_value,'\\. *([^"]+)\\"',sep=''))[,2],'\n',Comment),
+                              "sample tooltip for benchmark ref dataset"),
              colour = Colour,
              transparency = Transparency
       )
@@ -95,11 +95,7 @@ scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
       scores_df <- summarise(group_by(target_scores,
                                       variable=dimension),
                              value = mean(value_t,na.rm=TRUE),
-                             #low = ifelse(reference== FALSE, NA, mean(low,na.rm=TRUE)), #review when clearer what values 
-                             #high = ifelse(reference== FALSE, NA, mean(high,na.rm=TRUE)), #low and high should display
-                             tooltip = ifelse(reference == FALSE,
-                                              paste(variable_t,"-",value_t,collapse="\n"),
-                                              "sample tooltip for benchmark ref dataset"),
+                             tooltip = paste(variable_t,"-",value_t,collapse="\n"),
                              colour = unique(colour),
                              transparency = 1
                              )
