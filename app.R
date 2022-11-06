@@ -18,8 +18,8 @@ if(!require("data.table")){install.packages("data.table"); library(data.table)}
 
 # Change encoding to UTF-8
 options(encoding="UTF-8") 
-
-setupApp(questionnaire_file = "data/EU-EpiCap_Questionnaire_22_05_11.xlsx")
+questionnaire_file <- "data/EU-EpiCap_Questionnaire_22_05_11.xlsx"
+setupApp(questionnaire_file = questionnaire_file)
 
 # User interface ----------------------------------------------------------
 
@@ -499,7 +499,7 @@ server <- function(input, output, session) {
     resultsServer("resultsPage", scores_targets=scores_targets, scores_indicators=scores_indicators, scores_dimensions=scores_dimensions,stringsAsFactors = FALSE)
     
     ### creating the Benchmarking page (with plots and associated texts)
-    benchmarkServer("benchmarkPage", scores_targets=scores_targets, scores_indicators=scores_indicators, ref_files=ref_files, stringsAsFactors = FALSE)
+    benchmarkServer("benchmarkPage", scores_targets=scores_targets, scores_indicators=scores_indicators, stringsAsFactors = FALSE)
     }
 
 shinyApp(ui, server)

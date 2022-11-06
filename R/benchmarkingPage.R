@@ -12,17 +12,16 @@
 #}
 
 #Helper function: formats a reference data file into scoring table format
-formatRefDataset <- function(refdatafile){
+formatRefDataset <- function(refdatafile, questionnaire_file = questionnaire_file){
   
   source("R/scoringHelpers.R")
   
   #Check if questionnaire exists (in the global env), and if not read in questionnaire (within function)
   if(!exists("questionnaire")){
     source("R/questionnaireHelpers.R")
-    qdata <- readQuestionnaire("data/EU-EpiCap_Questionnaire_21_11_30.xlsx") #Need to keep this updated or make more generic
-    questionnaire <- qdata$questionnaire
+    questionnaire <- readQuestionnaire(questionnaire_file)
   }
-  #Read in ref data (read.csv or readRDS)
+  #Read in ref data (read.csv)
   #refdatafile<-"Data/reference_datasets/example_benchmark_data.csv"
   refdata <- read.csv(refdatafile)
   
@@ -34,13 +33,12 @@ formatRefDataset <- function(refdatafile){
     high = refdata$High
   )
   
-  #Create scoring table and save to file
-  for (level in c("targets","indicators")){
-    write.csv(scoringTable(qwv,level,reference=TRUE), #this creates scoring table with sample tooltips (change in scoringHelpers as appropriate)
-              file=paste0("data/reference_datasets/",basename(tools::file_path_sans_ext(refdatafile)),"_ST",level,".csv"),
-              row.names=FALSE
-    )
-  }
+  #Create scoring tables as variables
+  ref_targets <- scoringTable(qwv,"targets",reference=TRUE)
+  ref_indicators <- scoringTable(qwv,"indicators",reference=TRUE)
+  
+  #pass scoring tables on to parent environment
+  return(list(ref_targets = ref_targets, ref_indicators = ref_indicators))
 }
 
 # Module UI function
@@ -124,28 +122,21 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
 }
 
 # Module server function
-benchmarkServer <- function(id, scores_targets=scores_targets, scores_indicators=scores_indicators, ref_files=ref_files, stringsAsFactors) {
+benchmarkServer <- function(id, scores_targets=scores_targets, scores_indicators=scores_indicators, stringsAsFactors) {
   moduleServer(
     id,
     ## Below is the module function
     function(input, output, session) {
-    
-      #read in reference scoring tables
-      selected_ref_files <- reactive({
-        validate(need(!is.null(input$selected_ref$datapath), message = "Please select a benchmark file."))
-        #ref_files[which(str_detect(ref_files, input$selected_ref))]
-        return(as.character(input$selected_ref[[1]]))
-      })
-      ref_targets <- reactive({
-        #read.csv(paste0("data/reference_datasets/",as.character(selected_ref_files()[which(str_detect(ref_files,"STtargets"))])))
-        read.csv(paste0("data/reference_datasets/",selected_ref_files,"STtargets"))
-      })
-      ref_indic <- reactive({
-        #read.csv(paste0("data/reference_datasets/",as.character(selected_ref_files()[which(str_detect(ref_files,"STindicators"))])))
-        read.csv(paste0("data/reference_datasets/",selected_ref_files,"STindicators"))
-      })
       
-      #generate radarcharts
+      #creates scoring tables from selected reference datafile, stores these as variables
+      ref_ST <- reactive({
+        validate(need(!is.null(input$selected_ref$datapath), message = "Please select a benchmark file."))
+        formatRefDataset(input$selected_ref$datapath)
+      })
+      ref_targets <- reactive({ref_ST()$ref_targets})
+      ref_indic <- reactive({ref_ST()$ref_indicators})
+
+      #generate radarcharts, using scoring tables from the active profile and the reference dataset
       output$benchmark_all <- renderGirafe(makeRadarPlot_benchmark(scores_targets(),3,ref_targets()))
       output$benchmark_1 <- renderGirafe(makeRadarPlot_benchmark(scores_indicators()[1:20,],4,ref_indic()[1:16,]))
       output$benchmark_2 <- renderGirafe(makeRadarPlot_benchmark(scores_indicators()[21:40,],4,ref_indic()[17:32,]))
