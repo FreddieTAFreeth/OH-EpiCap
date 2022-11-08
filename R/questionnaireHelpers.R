@@ -78,7 +78,6 @@ readQuestionnaire <- function(datafile) {
   questionnaire$Question<-paste0(questionnaire$Question,"?")
   questionnaire$Notes<-trimws(questionnaire$Notes)
   questionnaire$Colour <- c(rep("#F47931",16),rep("#00679C",16),rep("#CECECE",16))
-  questionnaire$Transparency <- rep(c(rep(1,4),rep(0.9,4),rep(0.8,4),rep(0.7,4)),3)
 
 
   return(questionnaire)
