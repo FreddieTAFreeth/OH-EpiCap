@@ -45,7 +45,7 @@ addScores2Questionnaire <- function(input, questionnaire) {
 
 scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
   
-  origin_points <- list(x=0,variable=NA,value=0,tooltip="",colour=NA, transparency = NA) # a dataframe row to represent (0,0) points with no tooltip or label
+  origin_points <- list(x=0,variable=NA,value=0,tooltip="",colour=NA) # a dataframe row to represent (0,0) points with no tooltip or label
 
   if(level == "indicators") {
     scores_df <- questionnaire_w_values %>%
@@ -55,17 +55,16 @@ scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
              tooltip = ifelse(reference == FALSE,
                               paste0(str_match(Options,paste(Chosen_value,'\\. *([^"]+)\\"',sep=''))[,2],'\n',Comment),
                               "sample tooltip for benchmark ref dataset"),
-             colour = Colour,
-             transparency = Transparency
+             colour = Colour
       )
     if(reference == FALSE){
       scores_df <- scores_df %>%
         group_by(Dimension,Target) %>%
         group_modify(~ add_row(.x,as_tibble(origin_points),.before=0)) %>%
         ungroup() %>%
-        select(x, variable, value, tooltip, colour, transparency)
+        select(x, variable, value, tooltip, colour)
     }else{
-      scores_df <- scores_df %>%  select(x, variable, value, low, high, tooltip, colour, transparency)
+      scores_df <- scores_df %>%  select(x, variable, value, low, high, tooltip, colour)
     }
   }
     
@@ -79,16 +78,15 @@ scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
                                tooltip = ifelse(reference == FALSE,
                                                 paste("Target average:",value_t,"\n",paste(Indicators,"-",Chosen_value,collapse="\n")),
                                                 "sample tooltip for benchmark ref dataset"),
-                               colour = unique(Colour),
-                               transparency = unique(Transparency)
+                               colour = unique(Colour)
                                )
     if(level == "targets"){
-      target_scores <- target_scores %>% ungroup() %>% mutate(variable = variable_t, value = value_t, x=seq(15,345,30), transparency = 1)
+      target_scores <- target_scores %>% ungroup() %>% mutate(variable = variable_t, value = value_t, x=seq(15,345,30))
       if(reference == FALSE){
-        target_scores <- target_scores %>% select(x, variable, value, tooltip, colour, transparency)
+        target_scores <- target_scores %>% select(x, variable, value, tooltip, colour)
         scores_df <- rbind(origin_points,target_scores[1:4,], origin_points,target_scores[5:8,], origin_points,target_scores[9:12,],make.row.names=FALSE)
       }else{
-        scores_df <- target_scores %>% select(x, variable, value, low, high, tooltip, colour, transparency)
+        scores_df <- target_scores %>% select(x, variable, value, low, high, tooltip, colour)
       }
     }
     else if(level == "dimensions"){
@@ -96,8 +94,7 @@ scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
                                       variable=dimension),
                              value = mean(value_t,na.rm=TRUE),
                              tooltip = paste(variable_t,"-",value_t,collapse="\n"),
-                             colour = unique(colour),
-                             transparency = 1
+                             colour = unique(colour)
                              )
     }
   }

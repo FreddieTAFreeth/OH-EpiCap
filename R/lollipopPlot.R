@@ -23,8 +23,8 @@ makeLollipopPlot<-function(scoring_table, level){
   mutated_data <- scoring_table %>% arrange(value) %>% mutate(variable=factor(variable,levels=variable)) %>% drop_na()
   #add data to lollipop plot
   lp <- lp + #accesses rp from global env, but returns updated value within main function env
-    geom_segment(data=mutated_data, aes(x=variable, xend=variable, y=1, yend=value), color=mutated_data$colour, alpha=mutated_data$transparency) +
-    geom_point_interactive(data=mutated_data, mapping = aes(x=variable, y=value, tooltip = tooltip), color=mutated_data$colour, alpha=mutated_data$transparency, size=4) +
+    geom_segment(data=mutated_data, aes(x=variable, xend=variable, y=1, yend=value), color=mutated_data$colour) +
+    geom_point_interactive(data=mutated_data, mapping = aes(x=variable, y=value, tooltip = tooltip), color=mutated_data$colour, size=4) +
     #xlab(level)
     xlab(NULL)
   if(level == "Dimensions"){girafe(code = print(lp),height_svg = 2.5)}else{girafe(code = print(lp))}
