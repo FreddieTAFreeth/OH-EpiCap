@@ -212,22 +212,22 @@ ui <- dashboardPage(
                     p("The OH-EpiCap tool can be completed in two ways:"),
                     tags$ul(
                       tags$li("Manual completion of the questionnaire,"),
-                      tags$li("Uploading pre-saved answers from a .csv or .rds file.")
+                      tags$li("Uploading pre-saved answers from a .csv file.")
                     ),
-                    p("Note: to see the results and analysis of your questionnaire results, you must complete all questions of the questionnaire. Furthermore, for an in-depth tutorial, download the full OH-EpiCap tool guide here:", tags$a("The OH-EpiCap Tool Guide", href="OH-EpiCap_User guide_2022_06-03.pdf"),"."), 
+                    p("Note: to see the results and analysis of your questionnaire results, you must complete all questions of the questionnaire. Furthermore, for an in-depth tutorial, download the full OH-EpiCap tool guide here:", tags$a("The OH-EpiCap Tool Guide", href="OH-EpiCap_User guide_2022_06-03.pdf"),". Furthermore, the tool does not save your work automatically. Therefore, please ensure that your work is saved locally before closing the window."), 
                     box(
                       width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
                       title = "Manual Completion of the Questionnaire",
-                      p("To start filling out the questionnaire, go to the sidebar on the left and click 'Questionnaire'. You will be required to answer the questions for each of the three dimensions, and you will be able to save your answers as a .csv or .rdf file. You will then be able to view the analysis."),
+                      p("To start filling out the questionnaire, go to the sidebar on the left and click 'Questionnaire'. You will be required to answer the questions for each of the three dimensions, and you will be able to save your answers as a .csv file. You will then be able to view the analysis."),
                       p("The questionnaire should be completed by a panel of representatives from the different sectors across the entire surveillance chain, during a workshop. To facilitate the discussion, we recommend a panel with 8-10 participants from different disciplines and surveillance programs. A 4-hour time slot is recommended for the workshop."),
-                      p("To start filling out the questionnaire, use the sidebar to navigate to the 'Questionnaire' tab and start completing each Target in each of the Dimensions. After completing all of the dimensions, you can save your answers as a downloadable file. To do this, navigate to the 'Save answers to file' tab and you can choose to save your answers as either a .csv or .rds file, or both. Note that the tool does not save your work automatically so please ensure you save your work before closing the window."),
+                      p("To start filling out the questionnaire, use the sidebar to navigate to the 'Questionnaire' tab and start completing each Target in each of the Dimensions. After completing all of the dimensions, you can save your answers as a downloadable file. To do this, navigate to the 'Save answers to file' tab and you can choose to save your answers as either a .csv file. Note that the tool does not save your work automatically, so please ensure you save your work before closing the window."),
                       p("Once the questionnaire has been completed, you may proceed to the 'Results' tab to view the analysis of your results. On the 'Benchmark' page, you can compare your results with a reference dataset."),
                       
                     ),
                     box(
                       width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
                       title = "Uploading a File",
-                      p("If you have already completed the questionnaire, you may upload the .csv or .rds file you saved to view your results. To do this, navigate to the 'Upload Answers From File' tab, click the 'Browse' button and upload your saved file. Your answers will then be used in the analysis as if you completed the questionnaire manually.")
+                      p("If you have already completed the questionnaire, you may upload the .csv file you saved to view your results. To do this, navigate to the 'Upload Answers From File' tab, click the 'Browse' button and upload your saved file. Your answers will then be used in the analysis as if you completed the questionnaire manually.")
                     ),
                     box(width=12, solidHeader=TRUE, status="danger", collapsible=FALSE, title = "Disclaimer",
                         p("Please note that answers you submit to the questionnaire are not stored in a central database, and only used in generating a report.")
@@ -235,7 +235,7 @@ ui <- dashboardPage(
                     p("Please continue to the questionnaire."),
             ),
             tabItem(tabName = "questionnaire",
-                    h2("Complete the OH-EpiCap questionnaire here"),
+                    h2("Complete The OH-EpiCap Questionnaire Here"),
             ),
             tabItem(tabName = "organization",
                     h2("Dimension 1: Organization"),
@@ -280,17 +280,17 @@ ui <- dashboardPage(
                     buildQuestionnaireUI(commands[commands$Dimension=='Dimension 3: Impact',])
             ),
             tabItem(tabName = "upload",
-                    h2("Upload questionnaire answers from file"),
+                    h2("Upload Questionnaire Answers From A File"),
                     p("Previously saved questionnaire answers, such as from a partially completed questionnaire, can be uploaded from file here. This allows the user to revisit or complete their answers, via the relevant Dimension pages. If the uploaded questionnaire is complete, results can also be visualised on the 'Results' page. Note that files not encoded in UTF-8, i.e. containing special characters, may cause unexpected behaviour."),
                     #questionnaireUploadUI("datafile", "Upload saved OH-EpiCap answers (.csv or .rds format)"),
                     questionnaireUploadUI("datafile", "Upload saved OH-EpiCap answers (.csv format)"),
             ),
             tabItem(tabName = "download",
                     h2("Save Questionnaire Answers to File"),
-                    p("(Partially) completed questionnaires can be saved to file here, allowing the user to revisit or complete their answers at a later time. Files can be saved in either .rds (machine-readable) or .csv (human-readable) format."),
+                    p("(Partially) completed questionnaires can be saved to file here, allowing the user to revisit or complete their answers at a later time. Files can be saved in .csv (human-readable) format."),
                     br(),
                     p("To upload a saved file and revisit the questionnaire answers, navigate to the 'Upload answers from file' page."),
-                    questionnaireDownloadUI("downloadedAnswers", "Download OH-EpiCap questionnaire answers (.csv or .rds format)")
+                    questionnaireDownloadUI("downloadedAnswers", "Download OH-EpiCap questionnaire answers (.csv format)")
             ),
             tabItem(tabName = "results", resultsOutput("resultsPage")),
             tabItem(tabName = "createBenchmark",
@@ -309,7 +309,7 @@ ui <- dashboardPage(
                     fileInput(input = "questionnaireFiles",
                               label = "Select completed questionnaire files",
                               multiple = TRUE,
-                              accept = c('text/csv', '.csv', '.rds', 'text/comma-separated-values,text/plain')
+                              accept = c('text/csv', '.csv', 'text/comma-separated-values,text/plain')
                     ),
                     uiOutput("questionnaireFileViewer"),
                     conditionalPanel(condition="output.questionnaireFileViewer",
@@ -329,6 +329,11 @@ ui <- dashboardPage(
                     p("Porttitor eget dolor morbi non arcu risus quis varius quam. Non tellus orci ac auctor augue mauris augue neque. Vel eros donec ac odio tempor orci dapibus. Urna cursus eget nunc scelerisque viverra mauris in aliquam sem. Viverra suspendisse potenti nullam ac tortor vitae. Vel facilisis volutpat est velit egestas dui id ornare arcu. Leo urna molestie at elementum eu facilisis. Purus sit amet volutpat consequat mauris nunc congue nisi. Sem integer vitae justo eget magna fermentum. Aliquam sem fringilla ut morbi tincidunt augue interdum velit euismod. Posuere lorem ipsum dolor sit amet consectetur. Lacinia quis vel eros donec. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Urna molestie at elementum eu facilisis sed odio. Enim sed faucibus turpis in eu mi bibendum neque egestas. Quis viverra nibh cras pulvinar mattis nunc."),
                     p("Dictum varius duis at consectetur lorem donec massa sapien faucibus. Commodo viverra maecenas accumsan lacus vel facilisis volutpat est velit. Velit dignissim sodales ut eu sem integer vitae justo eget. Proin nibh nisl condimentum id venenatis a condimentum. Volutpat est velit egestas dui id ornare arcu odio ut. Molestie at elementum eu facilisis sed odio morbi quis commodo. Commodo sed egestas egestas fringilla phasellus. Sed enim ut sem viverra aliquet eget. Nullam eget felis eget nunc lobortis mattis aliquam faucibus. Fringilla est ullamcorper eget nulla facilisi etiam. Rutrum tellus pellentesque eu tincidunt. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget egestas. Risus nec feugiat in fermentum posuere urna nec tincidunt praesent. In fermentum posuere urna nec tincidunt praesent. Nullam eget felis eget nunc lobortis mattis aliquam."),
                     p("Pellentesque massa placerat duis ultricies lacus. Eget arcu dictum varius duis. Pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper. Ac felis donec et odio pellentesque diam volutpat. Dignissim suspendisse in est ante in. Id velit ut tortor pretium. Fermentum et sollicitudin ac orci. Enim tortor at auctor urna nunc id. Cras pulvinar mattis nunc sed blandit. Auctor augue mauris augue neque gravida in. Aenean euismod elementum nisi quis eleifend quam adipiscing vitae proin. Est lorem ipsum dolor sit amet consectetur adipiscing elit. Cursus euismod quis viverra nibh cras pulvinar mattis nunc. Nam at lectus urna duis convallis convallis tellus. Egestas purus viverra accumsan in. Fermentum dui faucibus in ornare quam viverra orci sagittis."),
+                    box(
+                      width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
+                      title = "Source Code",
+                      p("This tool is free and open source. The source files for the OH-Epicap tool can be found in the GitHub repository in the following link:", tags$a("The OH-EpiCap Tool GitHub Repository", href="https://github.com/FreddieTAFreeth/OH-EpiCap"),".")
+                    ),
                     p("Ut morbi tincidunt augue interdum velit. Laoreet non curabitur gravida arcu ac tortor dignissim. Imperdiet nulla malesuada pellentesque elit eget gravida cum. Mauris cursus mattis molestie a iaculis at erat pellentesque. Nisl suscipit adipiscing bibendum est ultricies integer quis. Pharetra diam sit amet nisl suscipit adipiscing bibendum. Consequat interdum varius sit amet mattis. Etiam erat velit scelerisque in dictum. Est ante in nibh mauris. Mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan. Id volutpat lacus laoreet non curabitur gravida arcu. At elementum eu facilisis sed. Eu augue ut lectus arcu bibendum at varius vel.")
             )
         )

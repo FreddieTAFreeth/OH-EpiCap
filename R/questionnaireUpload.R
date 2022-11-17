@@ -7,8 +7,13 @@ questionnaireUploadUI <- function(id, label = "upload") {
   ns <- NS(id)
   
   tagList(
-    fileInput(ns("file"), label, accept=c("text/csv", "text/comma-separated-values", ".csv")),#, ".rds")), # I will harden .rds inputs later.
-    htmlOutput(ns("msg"))
+    box(width=12,
+        title="Upload Your Questionnaire File",
+        solidHeader=TRUE, status="primary",
+        collapsible=FALSE, collapsed=FALSE,
+        fileInput(ns("file"), label, accept=c("text/csv", "text/comma-separated-values", ".csv")),#, ".rds")), # I will harden .rds inputs later.
+        htmlOutput(ns("msg"))
+    )
   )
 }
 
