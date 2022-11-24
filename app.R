@@ -176,9 +176,6 @@ ui <- dashboardPage(
                     tags$h3(class="primary-subtitle", "Evaluation tool for One Health epidemiological surveillance capacities and capabilities"),
                     br(),
                     h2("About the OH-EpiCap Tool"),
-                    #p("The MATRIX project aims to advance the implementation of One Health (OH) Surveillance in practice by building onto existing resources, adding value to them and creating synergies among the sectors at the national level."),
-                    #p("Within work package four (WP4), a generic benchmarking tool (OH-EpiCap) is being developed for characterizing, monitoring and evaluating epidemiological surveillance capacities, which directly contribute to OHS. The tool aims to identify and describe the collaborations among actors involved in the surveillance of a hazard and to characterize the OH-ness of the surveillance system. The tool will support identification of areas that could lead to improvements in existing OH surveillance capacities."),
-                    #br(),
                     p("The purpose of the OH-EpiCap tool is to develop system-specific profiles of (potential) surveillance interoperability between sectors, highlighting both strength and gaps in surveillance capacity and capabilities. The OH-EpiCap tool will allow mapping, evaluation and improvement of ‘One Health-ness’ using a set of standardized indicators, to allow comparison across systems, countries and hazards of interest. Countries at similar levels of ‘OH-ness’, including similar capacities, limitations and resources, can together form an agreement to develop a common framework for One Health Surveillance (OHS) to address zoonotic threats across borders. This will improve national OH structures, including surveillance and data analysis, while also facilitating better integration of multinational collaboration. Countries at different levels of ‘OH-ness’ and surveillance capacity/resources can share experiences regarding surveillance practice against the same pathogen, transfer knowledge and share ideas to improve surveillance quality and efficacy across settings."),
                     p("Some of the features of the tool include:"),
                     tags$ul(
@@ -202,7 +199,13 @@ ui <- dashboardPage(
                     ),
                     p("The OH-EpiCap questionnaire can be completed by answering the questions on each of the individual Dimension pages (under the Questionnaire tab in the sidebar)."),
                     p("In each question, scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial. It is possible that the answers proposed for a question do not fit the OH surveillance system under evaluation; in this case, the panel of surveillance representatives should define what would be the ideal situation regarding this question for the OH surveillance system under evaluation and score the question accordingly by comparing the current situation to the ideal one. We recommend the panel to indicate in the comment space under the question which alternative answer(s) they considered."),
-                    p("The value 'Not Applicable (NA)' can be used if the indicator is not relevant to the OH surveillance system under evaluation.")
+                    p("The value 'Not Applicable (NA)' can be used if the indicator is not relevant to the OH surveillance system under evaluation."),
+                    box(
+                      width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
+                      title = "Authorship Statement",
+                      p("This tool was initially developed by Dr Carlijn Bogaardt, with Freddie Freeth continuing development of the app and adding features. The source code for this tool can be found in two identical repositories:", tags$a("Freddie Freeth's OH-EpiCap Tool GitHub Repository", href="https://github.com/FreddieTAFreeth/OH-EpiCap"), "and", tags$a("Carlijn Bogaardt's OH-EpiCap Tool GitHub Repository", href="https://github.com/CarlijnB/OH-EpiCap"),".")
+                    ),
+                    p("Please see the Legal page for the terms and conditions for the use of this tool.")
             ),
             #tabItem(tabName = "network",
             #        h2("Explore your Surveillance Network")
@@ -214,7 +217,7 @@ ui <- dashboardPage(
                       tags$li("Manual completion of the questionnaire,"),
                       tags$li("Uploading pre-saved answers from a .csv file.")
                     ),
-                    p("Note: to see the results and analysis of your questionnaire results, you must complete all questions of the questionnaire. Furthermore, for an in-depth tutorial, download the full OH-EpiCap tool guide here:", tags$a("The OH-EpiCap Tool Guide", href="OH-EpiCap_User guide_2022_06-03.pdf"),". Furthermore, the tool does not save your work automatically. Therefore, please ensure that your work is saved locally before closing the window."), 
+                    p("Note: to see the results and analysis of your surveillance capacity and capabilities, you must complete all questions of the questionnaire. Furthermore, for an in-depth tutorial, download the full OH-EpiCap tool guide here:", tags$a("The OH-EpiCap Tool Guide", href="OH-EpiCap_User guide_2022_06-03.pdf"),". Furthermore, the tool does not save your work automatically. Therefore, please ensure that your work is saved locally before closing the window."), 
                     box(
                       width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
                       title = "Manual Completion of the Questionnaire",
@@ -295,21 +298,14 @@ ui <- dashboardPage(
             tabItem(tabName = "results", resultsOutput("resultsPage")),
             tabItem(tabName = "createBenchmark",
                     h2("Create a Benchmark File"),
-                    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-                    box(width = 12, solidHeader = TRUE, status = "primary", collapsible = FALSE,
-                        title = "How to Create A Benchmark File:",
-                        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-                        tags$ul(
-                          tags$li("Lorem ipsum dolor sit amet,"),
-                          tags$li("Consectetur adipiscing elit,"),
-                          tags$li("Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                        ),
-                        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-                    ),
-                    fileInput(input = "questionnaireFiles",
-                              label = "Select completed questionnaire files",
-                              multiple = TRUE,
-                              accept = c('text/csv', '.csv', 'text/comma-separated-values,text/plain')
+                    p("To compare your surveillance capacity and capabilities with respect to other surveillance programmes, you will need to create a benchmark file. Please select your completed questionnaire files from the drop down options. Continue to “Benchmark” tab for visualisation of results."),
+                    box(width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
+                        title = "Upload Your Questionnaire Files",
+                        fileInput(input = "questionnaireFiles",
+                                  label = "Select completed questionnaire files",
+                                  multiple = TRUE,
+                                  accept = c('text/csv', '.csv', 'text/comma-separated-values,text/plain')
+                        )
                     ),
                     uiOutput("questionnaireFileViewer"),
                     conditionalPanel(condition="output.questionnaireFileViewer",
@@ -320,21 +316,13 @@ ui <- dashboardPage(
             tabItem(tabName = "glossary", glossaryOutput()),
             tabItem(tabName = "legal",
                     h2("Legal and Funding Information"),
-                    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum lectus mauris ultrices eros. Vitae justo eget magna fermentum iaculis eu non. In ornare quam viverra orci sagittis. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo. Ornare aenean euismod elementum nisi quis eleifend quam. Eget est lorem ipsum dolor sit amet. Neque sodales ut etiam sit amet nisl purus in. Vivamus at augue eget arcu dictum varius duis. Id donec ultrices tincidunt arcu non sodales neque sodales ut."),
+                    p("We, the University of Surrey, permit You to use the tool accessed through this site and associated content and documentation, together the “Tool”, for free on the following basis. You may not, without prior written consent from us: use or communicate the Tool for commercial purposes, nor transfer, share or licence the Tool to any third party for commercial purposes; and/or use the Tool to create any software that is substantially similar in its expression to the Tool."),
+                    p("The Tool is provided for general information only and all data inputs are only saved locally on Your machine. Outputs of the Tool are based on Your responses and should not be considered as advice on which You should rely. We make no representations, warranties or guarantees, whether express or implied, that use of the Tool will be uninterrupted or error-free, nor that the Tool will be free from vulnerabilities or viruses. The University of Surrey is not responsible or liable for the deletion of or failure to store any of Your information and other communications transmitted through Your use of the Tool. You are responsible and liable for complying with all applicable technology control or export laws and regulations that apply to Your use of the Tool."),
                     box(
                       width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
                       title = "Funding Statement",
                       p("The OH-EpiCap tool has received funding, through the One Health EJP, from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 773830.")
                     ),
-                    p("Porttitor eget dolor morbi non arcu risus quis varius quam. Non tellus orci ac auctor augue mauris augue neque. Vel eros donec ac odio tempor orci dapibus. Urna cursus eget nunc scelerisque viverra mauris in aliquam sem. Viverra suspendisse potenti nullam ac tortor vitae. Vel facilisis volutpat est velit egestas dui id ornare arcu. Leo urna molestie at elementum eu facilisis. Purus sit amet volutpat consequat mauris nunc congue nisi. Sem integer vitae justo eget magna fermentum. Aliquam sem fringilla ut morbi tincidunt augue interdum velit euismod. Posuere lorem ipsum dolor sit amet consectetur. Lacinia quis vel eros donec. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Urna molestie at elementum eu facilisis sed odio. Enim sed faucibus turpis in eu mi bibendum neque egestas. Quis viverra nibh cras pulvinar mattis nunc."),
-                    p("Dictum varius duis at consectetur lorem donec massa sapien faucibus. Commodo viverra maecenas accumsan lacus vel facilisis volutpat est velit. Velit dignissim sodales ut eu sem integer vitae justo eget. Proin nibh nisl condimentum id venenatis a condimentum. Volutpat est velit egestas dui id ornare arcu odio ut. Molestie at elementum eu facilisis sed odio morbi quis commodo. Commodo sed egestas egestas fringilla phasellus. Sed enim ut sem viverra aliquet eget. Nullam eget felis eget nunc lobortis mattis aliquam faucibus. Fringilla est ullamcorper eget nulla facilisi etiam. Rutrum tellus pellentesque eu tincidunt. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget egestas. Risus nec feugiat in fermentum posuere urna nec tincidunt praesent. In fermentum posuere urna nec tincidunt praesent. Nullam eget felis eget nunc lobortis mattis aliquam."),
-                    p("Pellentesque massa placerat duis ultricies lacus. Eget arcu dictum varius duis. Pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper. Ac felis donec et odio pellentesque diam volutpat. Dignissim suspendisse in est ante in. Id velit ut tortor pretium. Fermentum et sollicitudin ac orci. Enim tortor at auctor urna nunc id. Cras pulvinar mattis nunc sed blandit. Auctor augue mauris augue neque gravida in. Aenean euismod elementum nisi quis eleifend quam adipiscing vitae proin. Est lorem ipsum dolor sit amet consectetur adipiscing elit. Cursus euismod quis viverra nibh cras pulvinar mattis nunc. Nam at lectus urna duis convallis convallis tellus. Egestas purus viverra accumsan in. Fermentum dui faucibus in ornare quam viverra orci sagittis."),
-                    box(
-                      width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
-                      title = "Source Code",
-                      p("This tool is free and open source. The source files for the OH-Epicap tool can be found in the GitHub repository in the following link:", tags$a("The OH-EpiCap Tool GitHub Repository", href="https://github.com/FreddieTAFreeth/OH-EpiCap"),".")
-                    ),
-                    p("Ut morbi tincidunt augue interdum velit. Laoreet non curabitur gravida arcu ac tortor dignissim. Imperdiet nulla malesuada pellentesque elit eget gravida cum. Mauris cursus mattis molestie a iaculis at erat pellentesque. Nisl suscipit adipiscing bibendum est ultricies integer quis. Pharetra diam sit amet nisl suscipit adipiscing bibendum. Consequat interdum varius sit amet mattis. Etiam erat velit scelerisque in dictum. Est ante in nibh mauris. Mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan. Id volutpat lacus laoreet non curabitur gravida arcu. At elementum eu facilisis sed. Eu augue ut lectus arcu bibendum at varius vel.")
             )
         )
     )
