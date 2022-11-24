@@ -186,7 +186,7 @@ ui <- dashboardPage(
                     br(),
                     box(status="danger", width = 12, title = "Disclaimer:", solidHeader = TRUE, 
                       p("Here we present a functional 'beta' version of the tool, that is still under development. Therefore, expect placeholder text in some areas and a work-in-progress user interface.",
-                      tags$b("Please note that this version of the OH-EpiCap tool times out after 30 min of inactivity."), "To avoid data loss, you must save your data regularly using the 'Save answers to file' option. Feedback on the tool is welcome, you can e-mail this to Dr. Joaquin Prada (j.prada@surrey.ac.uk)."),
+                      tags$b("Please note that this version of the OH-EpiCap tool times out after 60 min of inactivity."), "To avoid data loss, you must save your data regularly using the 'Save answers to file' option."),
                     ),
                     br(),
                     p("The OH-EpiCap tool has been developed by the MATRIX consortium, an integrative project funded by the One Health European Joint Programme. The MATRIX consortium aims to advance the implementation of OHS in practice by building onto existing resources, adding value to them and creating synergies among the sectors at the national level.  One activity has been the development of the generic benchmarking tool presented here, for characterizing, monitoring and evaluating epidemiological surveillance capacities and capabilities, which directly contribute to OHS. The tool aims to identify and describe the collaborations among actors involved in the surveillance of a hazard and to characterize the OH-ness of the surveillance system. The tool will support identification of areas that could lead to improvements in existing OH surveillance capacities. "),
@@ -203,7 +203,7 @@ ui <- dashboardPage(
                     box(
                       width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
                       title = "Authorship Statement",
-                      p("This tool was initially developed by Dr Carlijn Bogaardt, with Freddie Freeth continuing development of the app and adding features. The source code for this tool can be found in two identical repositories:", tags$a("Freddie Freeth's OH-EpiCap Tool GitHub Repository", href="https://github.com/FreddieTAFreeth/OH-EpiCap"), "and", tags$a("Carlijn Bogaardt's OH-EpiCap Tool GitHub Repository", href="https://github.com/CarlijnB/OH-EpiCap"),".")
+                      p("This tool has been developed by the University of Surrey in collaboration with the French Agency for Food, Environmental and Occupational Health & Safety (ANSES). The interface has been developed by Dr Carlijn Bogaardt and Mr Freddie Freeth, supervised by Dr Joaquin M Prada. Content has been edited by Ms Emma Taylor, based on the tool created by Drs Henok Tegegne and Viviane Henaux. We are grateful to MATRIX WP4 colleagues and the broad consortium for feedback and suggestions. The source code for this tool can be found in two identical repositories:", tags$a("Freddie Freeth's OH-EpiCap Tool GitHub Repository", href="https://github.com/FreddieTAFreeth/OH-EpiCap"), "and", tags$a("Carlijn Bogaardt's OH-EpiCap Tool GitHub Repository.", href="https://github.com/CarlijnB/OH-EpiCap"), "Feedback on the tool is welcome, you can e-mail this to Dr. Joaquin Prada (j.prada@surrey.ac.uk).")
                     ),
                     p("Please see the Legal page for the terms and conditions for the use of this tool.")
             ),
