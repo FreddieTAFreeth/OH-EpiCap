@@ -1,20 +1,20 @@
 # Setup -------------------------------------------------------------------
 
-if(!require("shiny")){install.packages("shiny"); library(shiny)}
-if(!require("shinythemes")){install.packages("shinythemes"); library(shinythemes)}
-if(!require("shinydashboard")){install.packages("shinydashboard"); library(shinydashboard)}
-if(!require("shinyWidgets")){install.packages("shinyWidgets"); library(shinyWidgets)}
-if(!require("shinyjs")){install.packages("shinyjs"); library(shinyjs)}
-if(!require("flexdashboard")){install.packages("flexdashboard"); library(flexdashboard)}
-if(!require("tidyverse")){install.packages("tidyverse"); library(tidyverse)}
-if(!require("readxl")){install.packages("readxl"); library(readxl)}
-if(!require("tidyxl")){install.packages("tidyxl"); library(tidyxl)}
-if(!require("unpivotr")){install.packages("unpivotr"); library(unpivotr)}
-if(!require("Rcpp")){install.packages("Rcpp"); library(Rcpp)}
-if(!require("ggiraph")){install.packages("ggiraph"); library(ggiraph)}
-if(!require("ggmulti")){install.packages("ggmulti"); library(ggmulti)}
-if(!require("bslib")){install.packages("bslib"); library(bslib)}
-if(!require("data.table")){install.packages("data.table"); library(data.table)}
+library(shiny)
+library(shinythemes)
+library(shinydashboard)
+library(shinyWidgets)
+library(shinyjs)
+library(flexdashboard)
+library(tidyverse)
+library(readxl)
+library(tidyxl)
+library(unpivotr)
+library(Rcpp)
+library(ggiraph)
+library(ggmulti)
+library(bslib)
+library(data.table)
 
 # Change encoding to UTF-8
 options(encoding="UTF-8") 
@@ -290,7 +290,7 @@ ui <- dashboardPage(
             ),
             tabItem(tabName = "download",
                     h2("Save Questionnaire Answers to File"),
-                    p("(Partially) completed questionnaires can be saved to file here, allowing the user to revisit or complete their answers at a later time. Files can be saved in .csv (human-readable) format."),
+                    p("(Partially) completed questionnaires can be saved to a file, allowing the user to revisit or complete their answers at a later time. Files can be saved in .csv (human-readable) format."),
                     br(),
                     p("To upload a saved file and revisit the questionnaire answers, navigate to the 'Upload answers from file' page."),
                     questionnaireDownloadUI("downloadedAnswers", "Download OH-EpiCap questionnaire answers (.csv format)")

@@ -46,7 +46,7 @@ addScores2Questionnaire <- function(input, questionnaire) {
 scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
   
   origin_points <- list(x=0,variable=NA,value=0,tooltip="",colour=NA) # a dataframe row to represent (0,0) points with no tooltip or label
-
+  
   if(level == "indicators") {
     scores_df <- questionnaire_w_values %>%
       mutate(variable = Indicators,
@@ -67,7 +67,7 @@ scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
       scores_df <- scores_df %>%  select(x, variable, value, low, high, tooltip, colour)
     }
   }
-    
+  
   else{
     target_scores <- summarise(group_by(questionnaire_w_values,
                                         variable_t =Target,
@@ -79,7 +79,7 @@ scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
                                                 paste("Target average:",value_t,"\n",paste(Indicators,"-",Chosen_value,collapse="\n")),
                                                 "sample tooltip for benchmark ref dataset"),
                                colour = unique(Colour)
-                               )
+    )
     if(level == "targets"){
       target_scores <- target_scores %>% ungroup() %>% mutate(variable = variable_t, value = value_t, x=seq(15,345,30))
       if(reference == FALSE){
@@ -95,10 +95,10 @@ scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
                              value = mean(value_t,na.rm=TRUE),
                              tooltip = paste(variable_t,"-",value_t,collapse="\n"),
                              colour = unique(colour)
-                             )
+      )
     }
   }
-
+  
   if("x" %in% colnames(scores_df)){scores_df$x <- as.numeric(scores_df$x)}
   scores_df$value <- as.numeric(scores_df$value)
   if(reference==TRUE){

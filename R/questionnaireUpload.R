@@ -11,7 +11,17 @@ questionnaireUploadUI <- function(id, label = "upload") {
         title="Upload Your Questionnaire File",
         solidHeader=TRUE, status="primary",
         collapsible=FALSE, collapsed=FALSE,
-        fileInput(ns("file"), label, accept=c("text/csv", "text/comma-separated-values", ".csv")),#, ".rds")), # I will harden .rds inputs later.
+        fluidRow(
+          column(6,fileInput(ns("file"), label, accept=c("text/csv", "text/comma-separated-values", ".csv"))),#, ".rds")), # I will harden .rds inputs later.
+          column(6,
+                 HTML("<b>Example Questionnaire Files</b>"),
+                 p("To demo the Results page, please download one of the following questionnaire files and upload it into the app:",
+                   tags$a("Example Questionnaire 1", href="reference_datasets/example_questionnaire_answers.csv"), "and",
+                   tags$a("Example Questionnaire 2.", href="reference_datasets/example_questionnaire_answers_2.csv"),
+                   "You are also able to upload these questionnaire files into the Create Benchmark tab to demo the create benchmark functionality of this tool."
+                  ),
+          )
+        ),
         htmlOutput(ns("msg"))
     )
   )
@@ -34,7 +44,7 @@ questionnaireUploadServer <- function(id, stringsAsFactors) {
         
         # Check if the file has the correct format:
         df <- read.csv(input$file$datapath, header = TRUE, sep = ",", stringsAsFactors = stringsAsFactors, colClasses="character", na.strings = NULL, fileEncoding = "UTF-8", encoding = "UTF-8")
-        validate(need(all(c(nrow(df[which(grepl("Q",df[,1])),]) == 48, ncol(df) == 2, all(df[which(grepl("Q",df[,1])), 2] %in% c("NULL", "NA", "1", "2", "3", "4")))),
+        validate(need(all(c(nrow(df[which(grepl("Q",df[,1])),]) == 48, nrow(df[which(grepl("C",df[,1])),]) == 48, ncol(df) == 2, all(df[which(grepl("Q",df[,1])), 2] %in% c("NULL", "NA", "1", "2", "3", "4")))),
                       message = paste0("Your file, ", input$file$name,", does not have the expected format. We expect there to be two columns; one for the question number, and one for the value. Each value should be one of 'NULL' (in the case for incomplete questionnaire files), 'NA', '1', '2', '3' or '4'.")))
         input$file
       })
@@ -43,7 +53,7 @@ questionnaireUploadServer <- function(id, stringsAsFactors) {
       state <- reactive({
         #if .rds file - NOTE: This conditional branch will never execute due to disabling .rds inputs above.
         if(tools::file_ext(userFile()$datapath) == "rds"){
-          readRDS(userFile()$datapath)  
+          readRDS(userFile()$datapath)
           #if .csv file
         } else if(tools::file_ext(userFile()$datapath) == "csv") {
           df <- read.csv(userFile()$datapath, 
@@ -51,9 +61,7 @@ questionnaireUploadServer <- function(id, stringsAsFactors) {
                          sep = ",",
                          stringsAsFactors = stringsAsFactors,
                          colClasses="character",
-                         na.strings = NULL,
-                         fileEncoding = "UTF-8",
-                         encoding = "UTF-8"
+                         na.strings = NULL
           )
           setNames(as.list(df$Value),df$Question)
         } 

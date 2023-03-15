@@ -55,10 +55,12 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
           title="Reference Dataset",
           solidHeader=TRUE, status="danger",
           collapsible=FALSE, collapsed=FALSE,
-          fluidRow(column(6,fileInput(inputId = ns("selected_ref"), label = "Please select a benchmark file", multiple = FALSE,
-                                      accept = c('text/csv', '.csv', 'text/comma-separated-values,text/plain'))
-                          ),
-                   column(6,))
+          fluidRow(column(6,fileInput(inputId = ns("selected_ref"), label = "Please select a benchmark file", multiple = FALSE, accept = c('text/csv', '.csv', 'text/comma-separated-values,text/plain'))),
+                   column(6,
+                          HTML("<b>Example Benchmark File</b>"),
+                          p("To demo the Benchmarking page, please download the following benchmark file and upload it into the app:", tags$a("Example Benchmark File", href="reference_datasets/example_questionnaire_answers.csv"))
+                    )
+          )
       )
     ),
     fluidRow(

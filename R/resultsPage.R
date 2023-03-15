@@ -1,83 +1,82 @@
-
 # Module UI function
 resultsOutput <- function(id, label = "results") {
   # `NS(id)` returns a namespace function, which was save as `ns` and will
   # invoke later.
   ns <- NS(id)
-  
+
   tagList(
     h2("Results: Visualise your OH-EpiCap profile"),
     p("This page visually summarises an interactively completed, or uploaded, OH-EpiCap profile. This page can also be downloaded in report form by clicking the 'Download report' button to the right. The report is in HTML format, and includes interactive visualisations."),
     downloadButton(ns("report"), "Download report",width=2, style="background-color: #EF7933; color:white;"),
     p(),br(),
     div(id="foo",
-      fluidRow(
-       box(width=12,
-           title="OH-EpiCap Index and Dimensions",
-           solidHeader=TRUE, status="success",
-           collapsible=TRUE, collapsed=FALSE,
-           p("OH-EpiCap and Dimension indices represent mean scores over all questions, expressed as a percentage."),
-           #textOutput(ns("restxt_overall")),
-           fluidRow(column(4),
-                    gaugeOutput(ns("indexGauge")),
-                    column(4)),
-           fluidRow(column(4,gaugeOutput(ns("organizationGauge"))),
-                    column(4,gaugeOutput(ns("operationsGauge"))),
-                    column(4,gaugeOutput(ns("impactGauge"))))
-           )),
-      fluidRow(
-        box(width=12,
-            title="Targets",
-            solidHeader=TRUE, status="info",
-            collapsible=TRUE, collapsed=TRUE,
-            p("This section shows the results of the twelve targets, divided across the three dimensions.",
-              br(),
-              "Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial.",
-              br(),
-              "Users are encouraged to hover over data points to view a breakdown of each target score."),
-            fluidRow(column(6, girafeOutput(ns("lollipop_tar"))),
-                     column(6, girafeOutput(ns("radar_all")))),
-            uiOutput(ns("restxt_targets")),
-            )),
-      fluidRow(
-        box(width=12,
-            title="Dimension 1: Organization",
-            solidHeader=TRUE, status="warning",
-            collapsible=TRUE, collapsed=TRUE,
-            fluidRow(
-              column(6,
-                     p("This section shows the results across all indicators within the four targets of Dimension 1 (Organization)."),
-                     p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
-                     p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
-                     uiOutput(ns("restxt_dim1"))),
-              column(6, girafeOutput(ns("radar_1"))))
-            )),
-      fluidRow(
-        box(width=12,
-            title="Dimension 2: Operations",
-            solidHeader=TRUE, status="primary",
-            collapsible=TRUE, collapsed=TRUE,
-            fluidRow(
-              column(6,
-                     p("This section shows the results across all indicators within the four targets of Dimension 2 (Operations)."),
-                     p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
-                     p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
-                     uiOutput(ns("restxt_dim2"))),
-              column(6, girafeOutput(ns("radar_2"))))
-            )),
-      fluidRow(
-        box(width=12,
-            title="Dimension 3: Impact",
-            solidHeader=TRUE,
-            collapsible=TRUE, collapsed=TRUE,
-            fluidRow(
-              column(6,
-                     p("This section shows the results across all indicators within the four targets of Dimension 3 (Impact)."),
-                     p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
-                     p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
-                     uiOutput(ns("restxt_dim3"))),
-              column(6, girafeOutput(ns("radar_3"))))
-            ))
+        fluidRow(
+          box(width=12,
+              title="OH-EpiCap Index and Dimensions",
+              solidHeader=TRUE, status="success",
+              collapsible=TRUE, collapsed=FALSE,
+              p("OH-EpiCap and Dimension indices represent mean scores over all questions, expressed as a percentage."),
+              #textOutput(ns("restxt_overall")),
+              fluidRow(column(4),
+                       gaugeOutput(ns("indexGauge")),
+                       column(4)),
+              fluidRow(column(4,gaugeOutput(ns("organizationGauge"))),
+                       column(4,gaugeOutput(ns("operationsGauge"))),
+                       column(4,gaugeOutput(ns("impactGauge"))))
+          )),
+        fluidRow(
+          box(width=12,
+              title="Targets",
+              solidHeader=TRUE, status="info",
+              collapsible=TRUE, collapsed=TRUE,
+              p("This section shows the results of the twelve targets, divided across the three dimensions.",
+                br(),
+                "Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial.",
+                br(),
+                "Users are encouraged to hover over data points to view a breakdown of each target score."),
+              fluidRow(column(6, girafeOutput(ns("lollipop_tar"))),
+                       column(6, girafeOutput(ns("radar_all")))),
+              uiOutput(ns("restxt_targets")),
+          )),
+        fluidRow(
+          box(width=12,
+              title="Dimension 1: Organization",
+              solidHeader=TRUE, status="warning",
+              collapsible=TRUE, collapsed=TRUE,
+              fluidRow(
+                column(6,
+                       p("This section shows the results across all indicators within the four targets of Dimension 1 (Organization)."),
+                       p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
+                       p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
+                       uiOutput(ns("restxt_dim1"))),
+                column(6, girafeOutput(ns("radar_1"))))
+          )),
+        fluidRow(
+          box(width=12,
+              title="Dimension 2: Operations",
+              solidHeader=TRUE, status="primary",
+              collapsible=TRUE, collapsed=TRUE,
+              fluidRow(
+                column(6,
+                       p("This section shows the results across all indicators within the four targets of Dimension 2 (Operations)."),
+                       p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
+                       p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
+                       uiOutput(ns("restxt_dim2"))),
+                column(6, girafeOutput(ns("radar_2"))))
+          )),
+        fluidRow(
+          box(width=12,
+              title="Dimension 3: Impact",
+              solidHeader=TRUE,
+              collapsible=TRUE, collapsed=TRUE,
+              fluidRow(
+                column(6,
+                       p("This section shows the results across all indicators within the four targets of Dimension 3 (Impact)."),
+                       p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
+                       p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
+                       uiOutput(ns("restxt_dim3"))),
+                column(6, girafeOutput(ns("radar_3"))))
+          ))
     )
   )
 }
@@ -144,7 +143,7 @@ resultsServer <- function(id, scores_targets=scores_targets, scores_indicators=s
                                                     "Indicators that would <b>most benefit from improvement</b> are: <b>",dim3_low(), "</b>."
       ))})
       output$restxt_dim3 <- renderUI({restxt_dim3_reactive()})
- 
+
       #generate automatic report , from https://shiny.rstudio.com/articles/generating-reports.html
       output$report <- downloadHandler(
         filename = "OHEpiCap-report.html",  # For PDF output, change this to .pdf
@@ -159,7 +158,7 @@ resultsServer <- function(id, scores_targets=scores_targets, scores_indicators=s
         }
       )
     }
-  )    
+  )
 }
 
 
