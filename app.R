@@ -60,7 +60,7 @@ ui <- dashboardPage(
             menuItem("Legal Information", tabName = "legal", icon=icon("gavel")),
             box(width = 12, solidHeader = TRUE, status = "danger", collapsible = FALSE, background = "red", height="auto",
                 title = "Important Disclaimer:",
-                p("All of the data entered in this tool is processed on your device and is not sent externally.")
+                p("Please see the Legal page for information relating to the management and processing of the data entered in this app.")
             )
         )
     ),
@@ -203,7 +203,7 @@ ui <- dashboardPage(
                     box(
                       width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
                       title = "Authorship Statement",
-                      p("This tool has been developed by the University of Surrey in collaboration with the French Agency for Food, Environmental and Occupational Health & Safety (ANSES). The interface has been developed by Dr Carlijn Bogaardt and Mr Freddie Freeth, supervised by Dr Joaquin M Prada. Content has been edited by Ms Emma Taylor, based on the tool created by Drs Henok Tegegne and Viviane Henaux. We are grateful to MATRIX WP4 colleagues and the broad consortium for feedback and suggestions. The source code for this tool can be found in two identical repositories:", tags$a("Freddie Freeth's OH-EpiCap Tool GitHub Repository", href="https://github.com/FreddieTAFreeth/OH-EpiCap"), "and", tags$a("Carlijn Bogaardt's OH-EpiCap Tool GitHub Repository.", href="https://github.com/CarlijnB/OH-EpiCap"), "Feedback on the tool is welcome, you can e-mail this to Dr. Joaquin Prada (j.prada@surrey.ac.uk).")
+                      p("This tool has been developed by the University of Surrey in collaboration with the French Agency for Food, Environmental and Occupational Health & Safety (ANSES). The interface has been developed by Dr Carlijn Bogaardt and Mr Frederick T. A. Freeth, supervised by Dr Joaquin M Prada. Content has been edited by Ms Emma Taylor, based on the tool created by Drs Henok Tegegne and Viviane Henaux. We are grateful to MATRIX WP4 colleagues and the broad consortium for feedback and suggestions. The source code for this tool can be found in two linked repositories:", tags$a("Frederick T. A. Freeth's OH-EpiCap Tool GitHub Repository", href="https://github.com/FreddieTAFreeth/OH-EpiCap"), "and", tags$a("Carlijn Bogaardt's OH-EpiCap Tool GitHub Repository.", href="https://github.com/CarlijnB/OH-EpiCap"), "Feedback on the tool is welcome, you can e-mail this to Dr. Joaquin Prada (j.prada@surrey.ac.uk).")
                     ),
                     p("Please see the Legal page for the terms and conditions for the use of this tool.")
             ),
@@ -323,6 +323,8 @@ ui <- dashboardPage(
                       title = "Funding Statement",
                       p("The OH-EpiCap tool has received funding, through the One Health EJP, from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 773830.")
                     ),
+                    h2("Data Management and Privacy"),
+                    p("The OH-EpiCap web application does not collect any personal or identifying information regarding users or the surveillance system under evaluation, to comply with the European General Data Protection Regulation. OH-EpiCap questionnaire data(files) are processed and temporarily stored on an external server hosted by",tags$a("shinyapps.io", href="shinyapps.io"),"for the duration of the user’s session. All data remain inaccessible to the OH-EpiCap team or to other users of the app.")
             )
         )
     )

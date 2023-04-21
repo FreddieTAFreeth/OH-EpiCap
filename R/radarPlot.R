@@ -232,14 +232,14 @@ addDataToRadarPlot <- function(rp, scoring_table, n_partitions){
     annotate( #these are the labels in black, when not NA
       "text",
       x = scoring_table$x[(!is.na(scoring_table$value) & scoring_table$value !=0)], y = 5,
-      label = str_wrap(scoring_table$variable[(!is.na(scoring_table$value) & scoring_table$value !=0)], width=15),
-      size = 3, colour = "black"
+      label = str_wrap(scoring_table$variable[(!is.na(scoring_table$value) & scoring_table$value !=0)], width=10),
+      size = 2.4, colour = "black"
     )+
     annotate( #these are indicator labels in grey, for NA values
       "text",
       x = scoring_table$x[is.na(scoring_table$value)], y = 5,
-      label = str_wrap(scoring_table$variable[is.na(scoring_table$value)], width=15),
-      size = 3, colour = "grey"
+      label = str_wrap(scoring_table$variable[is.na(scoring_table$value)], width=10),
+      size = 2.4, colour = "grey"
     )
     
   if(n_partitions ==4){ 
