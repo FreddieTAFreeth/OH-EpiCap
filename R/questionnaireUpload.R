@@ -43,7 +43,7 @@ questionnaireUploadServer <- function(id, stringsAsFactors) {
         validate(need(extension %in% c("csv"), message =  "Invalid file. Please upload a .csv file."))
         
         # Check if the file has the correct format:
-        df <- read.csv(input$file$datapath, header = TRUE, sep = ",", stringsAsFactors = stringsAsFactors, colClasses="character", na.strings = NULL, fileEncoding = "UTF-8", encoding = "UTF-8")
+        df <- as.data.frame(data.table::fread(input$file$datapath, header = TRUE, sep = ",", stringsAsFactors = stringsAsFactors, colClasses="character", na.strings = NULL, encoding = "Latin-1"))
         validate(need(all(c(nrow(df[which(grepl("Q",df[,1])),]) == 48, nrow(df[which(grepl("C",df[,1])),]) == 48, ncol(df) == 2, all(df[which(grepl("Q",df[,1])), 2] %in% c("NULL", "NA", "1", "2", "3", "4")))),
                       message = paste0("Your file, ", input$file$name,", does not have the expected format. We expect there to be two columns; one for the question number, and one for the value. Each value should be one of 'NULL' (in the case for incomplete questionnaire files), 'NA', '1', '2', '3' or '4'.")))
         input$file
