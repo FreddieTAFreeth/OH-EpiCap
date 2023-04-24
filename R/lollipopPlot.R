@@ -27,7 +27,9 @@ makeLollipopPlot<-function(scoring_table, level){
     geom_point_interactive(data=mutated_data, mapping = aes(x=variable, y=value, tooltip = tooltip), color=mutated_data$colour, size=4) +
     #xlab(level)
     xlab(NULL)
-  if(level == "Dimensions"){girafe(code = print(lp),height_svg = 2.5)}else{girafe(code = print(lp))}
+  if(level == "Dimensions"){
+    girafe(code = print(lp),height_svg = 2.5, options = list(opts_toolbar(saveaspng = FALSE)))
+    }else{girafe(code = print(lp), options = list(opts_toolbar(saveaspng = FALSE)))}
 }
 
 
