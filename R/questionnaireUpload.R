@@ -56,13 +56,7 @@ questionnaireUploadServer <- function(id, stringsAsFactors) {
           readRDS(userFile()$datapath)
           #if .csv file
         } else if(tools::file_ext(userFile()$datapath) == "csv") {
-          df <- read.csv(userFile()$datapath, 
-                         header = TRUE,
-                         sep = ",",
-                         stringsAsFactors = stringsAsFactors,
-                         colClasses="character",
-                         na.strings = NULL
-          )
+          df <- as.data.frame(data.table::fread(userFile()$datapath, header = TRUE, sep = ",", stringsAsFactors = stringsAsFactors, colClasses="character", na.strings = NULL, encoding = "Latin-1"))
           setNames(as.list(df$Value),df$Question)
         } 
       })

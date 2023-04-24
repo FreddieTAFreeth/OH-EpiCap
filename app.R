@@ -324,7 +324,7 @@ ui <- dashboardPage(
                       p("The OH-EpiCap tool has received funding, through the One Health EJP, from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 773830.")
                     ),
                     h2("Data Management and Privacy"),
-                    p("The OH-EpiCap web application does not collect any personal or identifying information regarding users or the surveillance system under evaluation, to comply with the European General Data Protection Regulation. OH-EpiCap questionnaire data(files) are processed and temporarily stored on an external server hosted by",tags$a("shinyapps.io", href="shinyapps.io"),"for the duration of the user’s session. All data remain inaccessible to the OH-EpiCap team or to other users of the app.")
+                    p("To comply with the European General Data Protection Regulation (GDPR), the OH-EpiCap team does not collect any data through the application, and the application does not ask any personal or identifying information regarding users or the surveillance system under evaluation. The application is hosted in the cloud with",tags$a("shinyapps.io",href="https://www.shinyapps.io"),"and questionnaire and benchmark data(files) are processed and temporarily stored on an external server for the duration of the user's session only. All data remain inaccessible to other users of the app.")
             )
         )
     )
