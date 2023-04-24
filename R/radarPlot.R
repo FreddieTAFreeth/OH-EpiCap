@@ -259,7 +259,7 @@ addDataToRadarPlot <- function(rp, scoring_table, n_partitions){
 makeRadarPlot_results <- function(scoring_table, n_partitions){
   rp <- setupRadarPlot_results(scoring_table=scoring_table, n_partitions=n_partitions) %>% #accesses rp from global env, but returns updated value within main function env
     addDataToRadarPlot(scoring_table=scoring_table, n_partitions=n_partitions) #accesses rp from main function env, and returns updated value within main function env
-  girafe(code = print(rp)) # Printing the chart
+  girafe(code = print(rp), options = list(opts_toolbar(saveaspng = FALSE))) # Printing the chart
 }
 
 #Main function making a "Benchmark" radar chart from an EU-EpiCap profile scoring table and a reference scoring table
@@ -269,5 +269,5 @@ makeRadarPlot_results <- function(scoring_table, n_partitions){
 makeRadarPlot_benchmark <- function(scoring_table, n_partitions, ref_scoring_table){
   rp <- setupRadarPlot_benchmark(ref_scoring_table=ref_scoring_table, n_partitions=n_partitions) %>% #accesses rp from global env, but returns updated value within main function env
     addDataToRadarPlot(scoring_table=scoring_table, n_partitions=n_partitions) #accesses rp from main function env, and returns updated value within main function env
-  girafe(code = print(rp)) # Printing the chart
+  girafe(code = print(rp), options = list(opts_toolbar(saveaspng = FALSE))) # Printing the chart
 }
