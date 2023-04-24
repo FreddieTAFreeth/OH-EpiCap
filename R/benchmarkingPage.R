@@ -74,7 +74,8 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
                    p("The lightly coloured area depicts the interquartile range (IQR) of the relevant target score in the reference dataset, with the + symbol indicating the median."),
                    p("If a data point (filled circle) falls within the coloured area, the target score from the OH-EpiCap profile is within the range of the benchmark target."),
                    uiOutput(ns("bmtxt_targets"))),
-                   column(6, girafeOutput(ns("benchmark_all"))))
+                   column(6, girafeOutput(ns("benchmark_all")),  downloadButton(ns('save_benchmark_all'), 'Download Plot (SVG)', style="float:right")))
+          
       )
     ),
     fluidRow(
@@ -88,7 +89,7 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
                    p("The lightly coloured area depicts the interquartile range (IQR) of the relevant indicator score in the reference dataset, with the + symbol indicating the median."),
                    p("If a data point (filled circle) falls within the coloured area, the indicator score from the OH-EpiCap profile is within the range of the benchmark target."),
                    uiOutput(ns("bmtxt_dim1"))),
-            column(6, girafeOutput(ns("benchmark_1"))))
+            column(6, girafeOutput(ns("benchmark_1")), downloadButton(ns('save_benchmark_1'), 'Download Plot (SVG)', style="float:right")))
       )
     ),
     fluidRow(
@@ -102,7 +103,7 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
                    p("The lightly coloured area depicts the interquartile range (IQR) of the relevant indicator score in the reference dataset, with the + symbol indicating the median."),
                    p("If a data point (filled circle) falls within the coloured area, the indicator score from the OH-EpiCap profile is within the range of the benchmark target."),                   
                    uiOutput(ns("bmtxt_dim2"))),
-            column(6, girafeOutput(ns("benchmark_2"))))
+            column(6, girafeOutput(ns("benchmark_2")), downloadButton(ns('save_benchmark_2'), 'Download Plot (SVG)', style="float:right")))
       )
     ),
     fluidRow(
@@ -116,7 +117,7 @@ benchmarkUI <- function(id, label = "benchmark", ref_datasets) {
                    p("The lightly coloured area depicts the interquartile range (IQR) of the relevant indicator score in the reference dataset, with the + symbol indicating the median."),
                    p("If a data point (filled circle) falls within the coloured area, the indicator score from the OH-EpiCap profile is within the range of the benchmark target."),                   
                    uiOutput(ns("bmtxt_dim3"))),
-            column(6, girafeOutput(ns("benchmark_3"))))
+            column(6, girafeOutput(ns("benchmark_3")), downloadButton(ns('save_benchmark_3'), 'Download Plot (SVG)', style="float:right")))
       )
     ),
   )
@@ -184,6 +185,21 @@ benchmarkServer <- function(id, scores_targets=scores_targets, scores_indicators
       output$bmtxt_dim1 <- renderUI({HTML(paste0("Indicators exceeding the benchmark range, are: <b>",dim1_high(),"</b>.<br><br>Indicators falling below the benchmark range, are: <b>",dim1_low(),"</b>."))})
       output$bmtxt_dim2 <- renderUI({HTML(paste0("Indicators exceeding the benchmark range, are: <b>",dim2_high(),"</b>.<br><br>Indicators falling below the benchmark range, are: <b>",dim2_low(),"</b>."))})
       output$bmtxt_dim3 <- renderUI({HTML(paste0("Indicators exceeding the benchmark range, are: <b>",dim3_high(),"</b>.<br><br>Indicators falling below the benchmark range, are: <b>",dim3_low(),"</b>."))})
-      }
+      
+      
+      # Save benchmark figures as SVGs
+      output$save_benchmark_all <- downloadHandler(filename = "Benchmark_Plot_All.svg", 
+                                                  content = function(file){
+                                                    writeLines(reactive({makeRadarPlot_benchmark(scores_targets(),3,ref_targets())})()$x$html, con = file)})
+      output$save_benchmark_1 <- downloadHandler(filename = "Benchmark_Plot_1.svg", 
+                                                   content = function(file){
+                                                     writeLines(reactive({makeRadarPlot_benchmark(scores_indicators()[1:20,],4,ref_indic()[1:16,])})()$x$html, con = file)})
+      output$save_benchmark_2 <- downloadHandler(filename = "Benchmark_Plot_2.svg", 
+                                                   content = function(file){
+                                                     writeLines(reactive({makeRadarPlot_benchmark(scores_indicators()[21:40,],4,ref_indic()[17:32,])})()$x$html, con = file)})
+      output$save_benchmark_3 <- downloadHandler(filename = "Benchmark_Plot_3.svg", 
+                                                   content = function(file){
+                                                     writeLines(reactive({makeRadarPlot_benchmark(scores_indicators()[41:60,],4,ref_indic()[33:48,])})()$x$html, con = file)})
+    }
   )    
 }
