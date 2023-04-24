@@ -34,8 +34,8 @@ resultsOutput <- function(id, label = "results") {
                 "Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial.",
                 br(),
                 "Users are encouraged to hover over data points to view a breakdown of each target score."),
-              fluidRow(column(6, girafeOutput(ns("lollipop_tar")), downloadButton('save_lp', 'Download Plot', style="float:right")),
-                       column(6, girafeOutput(ns("radar_all")), downloadButton('save_rp_all', 'Download Plot', style="float:right"))),
+              fluidRow(column(6, girafeOutput(ns("lollipop_tar")), downloadButton(ns('save_lp'), 'Download Plot', style="float:right")),
+                       column(6, girafeOutput(ns("radar_all")), downloadButton(ns('save_rp_all'), 'Download Plot', style="float:right"))),
               br(),
               uiOutput(ns("restxt_targets")),
           )),
@@ -50,7 +50,7 @@ resultsOutput <- function(id, label = "results") {
                        p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
                        p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
                        uiOutput(ns("restxt_dim1"))),
-                column(6, girafeOutput(ns("radar_1")), downloadButton('save_rp1', 'Download Plot', style="float:right")))
+                column(6, girafeOutput(ns("radar_1")), downloadButton(ns('save_rp1'), 'Download Plot', style="float:right")))
           )),
         fluidRow(
           box(width=12,
@@ -63,7 +63,7 @@ resultsOutput <- function(id, label = "results") {
                        p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
                        p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
                        uiOutput(ns("restxt_dim2"))),
-                column(6, girafeOutput(ns("radar_2")), downloadButton('save_rp2', 'Download Plot', style="float:right")))
+                column(6, girafeOutput(ns("radar_2")), downloadButton(ns('save_rp2'), 'Download Plot', style="float:right")))
           )),
         fluidRow(
           box(width=12,
@@ -76,7 +76,7 @@ resultsOutput <- function(id, label = "results") {
                        p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
                        p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
                        uiOutput(ns("restxt_dim3"))),
-                column(6, girafeOutput(ns("radar_3")), downloadButton('save_rp3', 'Download Plot', style="float:right")))
+                column(6, girafeOutput(ns("radar_3")), downloadButton(ns('save_rp3'), 'Download Plot', style="float:right")))
           ))
     )
   )
@@ -146,11 +146,21 @@ resultsServer <- function(id, scores_targets=scores_targets, scores_indicators=s
       output$restxt_dim3 <- renderUI({restxt_dim3_reactive()})
       
       # Download the figures as PDFs
-      output$save_lp <- downloadHandler(filename = "Lollipop_Plot.pdf", content = girafeOutput(ns("lollipop_tar")))
-      output$save_rp_all <- downloadHandler(filename = "Radar_Plot_All.pdf", content = girafeOutput(ns("radar_all")))
-      output$save_rp1 <- downloadHandler(filename = "Radar_Plot_Oragnisation.pdf", content = girafeOutput(ns("radar_1")))
-      output$save_rp2 <- downloadHandler(filename = "Radar_Plot_Operation.pdf", content = girafeOutput(ns("radar_2")))
-      output$save_rp3 <- downloadHandler(filename = "Radar_Plot_Impact.pdf", content = girafeOutput(ns("radar_3")))
+      output$save_lp <- downloadHandler(filename = "Lollipop_Plot.svg",
+                                        content = function(file){
+                                          writeLines(lollipopreactive_tar()$x$html, con = file)})
+      output$save_rp_all <- downloadHandler(filename = "Radar_Plot_All.svg", 
+                                            content = function(file){
+                                              writeLines(radreactive_all()$x$html, con = file)})
+      output$save_rp1 <- downloadHandler(filename = "Radar_Plot_Organisation.svg",
+                                         content = function(file){
+                                           writeLines(radreactive_1()$x$html, con = file)})
+      output$save_rp2 <- downloadHandler(filename = "Radar_Plot_Operation.svg",
+                                         content = function(file){
+                                           writeLines(radreactive_2()$x$html, con = file)})
+      output$save_rp3 <- downloadHandler(filename = "Radar_Plot_Impact.svg",
+                                         content = function(file){
+                                           writeLines(radreactive_3()$x$html, con = file)})
 
       #generate automatic report , from https://shiny.rstudio.com/articles/generating-reports.html
       output$report <- downloadHandler(
