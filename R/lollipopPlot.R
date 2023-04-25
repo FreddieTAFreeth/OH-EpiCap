@@ -11,7 +11,8 @@ setupLollipopPlot<-function(max_score=4){
       #panel.grid.major.x = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.border = element_blank(),
-      axis.ticks.x = element_blank()
+      axis.ticks.x = element_blank(),
+      axis.text.y = element_text(hjust = 1, vjust = 0.5)
     ) +
     ylab("OH-EpiCap score") +
     scale_y_continuous(breaks=seq(1,max_score,1),minor_breaks=NULL,limits=c(1,max_score))

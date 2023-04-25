@@ -15,31 +15,11 @@ library(ggiraph)
 library(ggmulti)
 library(bslib)
 library(data.table)
-library(systemfonts)
-library(gfonts)
 
 # Change encoding to UTF-8
 options(encoding="UTF-8") 
 questionnaire_file <- "data/EU-EpiCap_Questionnaire_22_05_11.xlsx"
 setupApp(questionnaire_file = questionnaire_file)
-
-# To fix jagged lolipop plot labels in shinyapps.io export. Solution from: https://github.com/davidgohel/ggiraph/issues/91.
-# First set up the find and run setuo_font. Then you will have the www/fonts/ folder be created; locate the .woff file and
-# you're done.
-if (!dir.exists("www")) {
-  dir.create("www")
-  gfonts::setup_font(
-    id = "open-sans",
-    output_dir = "www",
-    variants = "regular",
-    prefer_local_source = FALSE)
-}
-
-if(!font_family_exists("open-sans")){
-  systemfonts::register_font(name = "Open Sans",
-                             plain = list("www/fonts/open-sans-v34-latin-regular.woff", 0)
-  )
-}
 
 # User interface ----------------------------------------------------------
 
@@ -88,105 +68,105 @@ ui <- dashboardPage(
 # UI - Header CSS ---------------------------------------------------------------
 
     dashboardBody(
-        tags$style(type="text/css", "
+      tags$style(type="text/css", "
             
-            /* Use OHEJP font and justify the text */
-            body{
-                font-family: Open Sans, Sans-Serif;
-                text-align: justify;
-                font-size: 16px;
-            }
-            
-            /* Change the headings to have OHEJP branding blue colors */
-            h1, h2, h3, h4 {
-                text-align: left;
-                color: #13699f;
-            }
-            
-            /* Ensures the colourful box() headings keep default font colours */
-            h3.box-title{color: unset!important;}
-            
-            /* Orange Download Button */
-            .btn-default {
-                background-color: #EF7933;
-                color: white;
-            }
-                   
-            /* Primary title and subtitle style */
-            .primary-title{
-                margin-top:10px; 
-                font-weight:bold;
-            }
-            .primary-subtitle{
-                margin-top:10px;
-                color: #EF7933; 
-                font-weight:bold;
-            }
-            
-            /* OHEJP blue border on hovered sidebar menu items */
-            .skin-blue.sidebar-menu>li.active>a, .skin-blue.sidebar-menu>li:hover>a {
-                color: #CECECD;
-                background: #1e282c;
-                border-left-color: #13699f !important;
-            }
-        
-            /* Fixing the navbar and sidebar in place*/
-            .sidebar {
-                height: 100vh;
-                overflow-x: hidden;
-                position: fixed !important;
-                top: 0 px;
-                width: 230px;
-            }
-            .content {
-                padding-top: 75px;
-                width: 50%;
-            }
-            
-            /* Wrapping long text in red disclaimer box */
-            .sidebar-menu {
-                white-space: normal!important;
-                overflow: hidden;
-                text-align: left;
-            }
-            
-            /* Fixing sidebar logo area in place*/
-            .skin-blue .main-header .logo{
-                background-color: #13699f; /* To match with rest of navbar*/ 
-                height: 52px; /* To match height with rest of navbar*/
-                border-right-color: #1e282c!important;
-                overflow-x: hidden;
-                position: fixed !important;
-                top: 0 px;
-            }
-            
-            /* Fixing the rest of the top bar in place*/
-            .skin-blue .main-header .navbar {
-                background-color: #13699f!important;
-                position: fixed !important;
-                top: 0 px;
-                width: 100%;
-            }
-            
-            /* Narrow devices*/
-            @media only screen and (max-width: 1920px){
-            
-                /* Fix the sidebar and top bar to the top on mobile devices */
-                .left-side, .main-sidebar {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    padding-top: 52px;
-                    width: 230px;
-                }
-                
-                /* Make the content fill the screen */
-                .content {width: 90% !important;}
-            }
-            
-            /* Fix for when deployed to shinyapps.io, plot label fonts go to serif */
-            text{font-family: Open Sans, Sans-Serif;}
-        "),
+          /* Use OHEJP font and justify the text */
+          body{
+              text-align: justify;
+              font-size: 16px;
+          }
+          
+          /* Change the headings to have OHEJP branding blue colors */
+          h1, h2, h3, h4 {
+              text-align: left;
+              color: #13699f;
+          }
+          
+          /* Ensures the colourful box() headings keep default font colours */
+          h3.box-title{color: unset!important;}
+          
+          /* Orange Download Button */
+          .btn-default {
+              background-color: #EF7933;
+              color: white;
+          }
+                 
+          /* Primary title and subtitle style */
+          .primary-title{
+              margin-top:10px; 
+              font-weight:bold;
+          }
+          .primary-subtitle{
+              margin-top:10px;
+              color: #EF7933; 
+              font-weight:bold;
+          }
+          
+          /* OHEJP blue border on hovered sidebar menu items */
+          .skin-blue.sidebar-menu>li.active>a, .skin-blue.sidebar-menu>li:hover>a {
+              color: #CECECD;
+              background: #1e282c;
+              border-left-color: #13699f !important;
+          }
+      
+          /* Fixing the navbar and sidebar in place*/
+          .sidebar {
+              height: 100vh;
+              overflow-x: hidden;
+              position: fixed !important;
+              top: 0 px;
+              width: 230px;
+          }
+          .content {
+              padding-top: 75px;
+              width: 50%;
+          }
+          
+          /* Wrapping long text in red disclaimer box */
+          .sidebar-menu {
+              white-space: normal!important;
+              overflow: hidden;
+              text-align: left;
+          }
+          
+          /* Fixing sidebar logo area in place*/
+          .skin-blue .main-header .logo{
+              background-color: #13699f; /* To match with rest of navbar*/ 
+              height: 52px; /* To match height with rest of navbar*/
+              border-right-color: #1e282c!important;
+              overflow-x: hidden;
+              position: fixed !important;
+              top: 0 px;
+          }
+          
+          /* Fixing the rest of the top bar in place*/
+          .skin-blue .main-header .navbar {
+              background-color: #13699f!important;
+              position: fixed !important;
+              top: 0 px;
+              width: 100%;
+          }
+          
+          /* Narrow devices*/
+          @media only screen and (max-width: 1920px){
+          
+              /* Fix the sidebar and top bar to the top on mobile devices */
+              .left-side, .main-sidebar {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  padding-top: 52px;
+                  width: 230px;
+              }
+              
+              /* Make the content fill the screen */
+              .content {width: 90% !important;}
+          }
+          
+          /* Fix for when deployed to shinyapps.io, plot label fonts go to serif */
+          text{font-family: 'Open Sans', Arial, Sans-Serif;}
+          *{font-family: 'Open Sans', Arial, Sans-Serif;}
+      "),
         
 # UI - tabs ---------------------------------------------------------------
         

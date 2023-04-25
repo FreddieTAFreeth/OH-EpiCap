@@ -108,7 +108,7 @@ setupRadarPlot <- function(max_score=4){
     xlab("") +  ylab("") +
     coord_radar()+
     expand_limits(x=c(0,360),y = c(0, max_score)) +
-    theme_bw() +        # Use ggplot theme_bw to remove greys
+    theme_bw() + # Use ggplot theme_bw to remove greys
     theme(
       axis.text.x = element_text(size = 8),
       axis.text.y = element_blank(),
