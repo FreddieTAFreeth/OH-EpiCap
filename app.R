@@ -21,6 +21,25 @@ options(encoding="UTF-8")
 questionnaire_file <- "data/EU-EpiCap_Questionnaire_22_05_11.xlsx"
 setupApp(questionnaire_file = questionnaire_file)
 
+# To fix jagged lolipop plot labels in shinyapps.io export. Solution from: https://github.com/davidgohel/ggiraph/issues/91.
+# First set up the find and run setuo_font. Then you will have the www/fonts/ folder be created; locate the .woff file and
+# you're done.
+if (!dir.exists("www")) {
+  dir.create("www")
+  library(gfonts)
+  setup_font(
+    id = "open-sans",
+    output_dir = "www",
+    variants = "regular",
+    prefer_local_source = FALSE)
+}
+
+if(!font_family_exists("open-sans")){
+  register_font(name = "Open Sans",
+                plain = list("open-sans-v34-latin-regular.woff", 0)
+  )
+}
+
 # User interface ----------------------------------------------------------
 
 ui <- dashboardPage(
@@ -164,7 +183,7 @@ ui <- dashboardPage(
                 .content {width: 90% !important;}
             }
             
-            /* Fix for when deployed to shinyapps.io, plot label font go to serif*/
+            /* Fix for when deployed to shinyapps.io, plot label fonts go to serif */
             text{font-family: Open Sans, Sans-Serif;}
         "),
         
