@@ -15,6 +15,8 @@ library(ggiraph)
 library(ggmulti)
 library(bslib)
 library(data.table)
+library(systemfonts)
+library(gfonts)
 
 # Change encoding to UTF-8
 options(encoding="UTF-8") 
@@ -26,8 +28,7 @@ setupApp(questionnaire_file = questionnaire_file)
 # you're done.
 if (!dir.exists("www")) {
   dir.create("www")
-  library(gfonts)
-  setup_font(
+  gfonts::setup_font(
     id = "open-sans",
     output_dir = "www",
     variants = "regular",
@@ -35,8 +36,8 @@ if (!dir.exists("www")) {
 }
 
 if(!font_family_exists("open-sans")){
-  register_font(name = "Open Sans",
-                plain = list("open-sans-v34-latin-regular.woff", 0)
+  systemfonts::register_font(name = "Open Sans",
+                             plain = list("www/fonts/open-sans-v34-latin-regular.woff", 0)
   )
 }
 
