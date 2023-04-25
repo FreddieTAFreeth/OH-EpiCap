@@ -162,9 +162,10 @@ ui <- dashboardPage(
                 
                 /* Make the content fill the screen */
                 .content {width: 90% !important;}
-                
             }
-
+            
+            /* Fix for when deployed to shinyapps.io, plot label font go to serif*/
+            text{font-family: Open Sans, Sans-Serif;}
         "),
         
 # UI - tabs ---------------------------------------------------------------
