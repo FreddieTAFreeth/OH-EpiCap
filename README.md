@@ -5,7 +5,7 @@
 # OH-EpiCap
 **OH-EpiCap Tool: Evaluation tool for One Health Epidemiological Surveillance Capacities and Capabilities**.
 
-Link to the web version of the tool: [https://freddietafreeth.shinyapps.io/OH-EpiCap/](https://freddietafreeth.shinyapps.io/OH-EpiCap/)
+Link to the web version of the tool: [https://freddietafreeth.shinyapps.io/OH-EpiCap/](https://freddietafreeth.shinyapps.io/OH-EpiCap/). This repository contains the code for the OH-EpiCap Tool, developed published in Frontiers: Tegegne, H. A., Bogaardt, C., Collineau, L., Cazeau, G., Lailler, R., Reinhardt, J., **Freeth, F. T.**, Taylor, E., Prada, J. M., &amp; Hénaux, V. (2023). OH-EpiCap: A semi-quantitative tool for the evaluation of one health epidemiological surveillance capacities and capabilities. Frontiers in Public Health, 11. https://doi.org/10.3389/fpubh.2023.1053986 
 
 The OH-EpiCap tool aims to develop system-specific profiles of (potential) surveillance interoperability between sectors, highlighting both strengths and gaps in surveillance capacities and capabilities. 
 
