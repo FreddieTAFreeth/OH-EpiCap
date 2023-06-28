@@ -285,7 +285,7 @@ ui <- dashboardPage(
             ),
             tabItem(tabName = "upload",
                     h2("Upload Questionnaire Answers From A File"),
-                    p("Previously saved questionnaire answers, such as from a partially completed questionnaire, can be uploaded from file here. This allows the user to revisit or complete their answers, via the relevant Dimension pages. If the uploaded questionnaire is complete, results can also be visualised on the 'Results' page. Note that files not encoded in UTF-8, i.e. containing special characters, may cause unexpected behaviour."),
+                    p("Previously saved questionnaire answers, such as from a partially completed questionnaire, can be uploaded from file here. This allows the user to revisit or complete their answers, via the relevant Dimension pages. If the uploaded questionnaire is complete, results can also be visualised on the 'Results' page."),
                     #questionnaireUploadUI("datafile", "Upload saved OH-EpiCap answers (.csv or .rds format)"),
                     questionnaireUploadUI("datafile", "Upload saved OH-EpiCap answers (.csv format)"),
             ),
