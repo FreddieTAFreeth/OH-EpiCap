@@ -23,7 +23,8 @@ resultsOutput <- function(id, label = "results") {
               fluidRow(column(4,gaugeOutput(ns("organizationGauge"))),
                        column(4,gaugeOutput(ns("operationsGauge"))),
                        column(4,gaugeOutput(ns("impactGauge"))))
-          )),
+          )
+        ),
         fluidRow(
           box(width=12,
               title="Targets",
@@ -34,11 +35,12 @@ resultsOutput <- function(id, label = "results") {
                 "Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial.",
                 br(),
                 "Users are encouraged to hover over data points to view a breakdown of each target score."),
-              fluidRow(column(6, girafeOutput(ns("lollipop_tar")), downloadButton(ns('save_lp'), 'Download Plot (SVG)', style="float:right")),
-                       column(6, girafeOutput(ns("radar_all")), downloadButton(ns('save_rp_all'), 'Download Plot (SVG)', style="float:right"))),
+              fluidRow(column(6, girafeOutput(ns("lollipop_tar")), downloadButton(outputId = ns('save_lp'), 'Download Plot (SVG)', style="float:right")),
+                       column(6, girafeOutput(ns("radar_all")), downloadButton(outputId = ns('save_rp_all'), 'Download Plot (SVG)', style="float:right"))),
               br(),
               uiOutput(ns("restxt_targets")),
-          )),
+          )
+        ),
         fluidRow(
           box(width=12,
               title="Dimension 1: Organization",
@@ -50,8 +52,9 @@ resultsOutput <- function(id, label = "results") {
                        p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
                        p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
                        uiOutput(ns("restxt_dim1"))),
-                column(6, girafeOutput(ns("radar_1")), downloadButton(ns('save_rp1'), 'Download Plot (SVG)', style="float:right")))
-          )),
+                column(6, girafeOutput(ns("radar_1")), downloadButton(outputId = ns('save_rp1'), 'Download Plot (SVG)', style="float:right")))
+          )
+        ),
         fluidRow(
           box(width=12,
               title="Dimension 2: Operations",
@@ -63,8 +66,9 @@ resultsOutput <- function(id, label = "results") {
                        p("Scores range 1-4, with higher values suggesting better adherence to the One Health principle (better integration of sectors), and lower values suggesting improvements may be beneficial."),
                        p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
                        uiOutput(ns("restxt_dim2"))),
-                column(6, girafeOutput(ns("radar_2")), downloadButton(ns('save_rp2'), 'Download Plot (SVG)', style="float:right")))
-          )),
+                column(6, girafeOutput(ns("radar_2")), downloadButton(outputId = ns('save_rp2'), 'Download Plot (SVG)', style="float:right")))
+          )
+        ),
         fluidRow(
           box(width=12,
               title="Dimension 3: Impact",
@@ -77,7 +81,8 @@ resultsOutput <- function(id, label = "results") {
                        p("Indicators labelled in grey indicate a question was answered with NA. Users are encouraged to hover over plotted data points to view the wording of the chosen indicator level, and any comments that may have been added in connection with a particular question."),
                        uiOutput(ns("restxt_dim3"))),
                 column(6, girafeOutput(ns("radar_3")), downloadButton(ns('save_rp3'), 'Download Plot (SVG)', style="float:right")))
-          ))
+          )
+        )
     )
   )
 }
@@ -145,22 +150,13 @@ resultsServer <- function(id, scores_targets=scores_targets, scores_indicators=s
       ))})
       output$restxt_dim3 <- renderUI({restxt_dim3_reactive()})
       
+      
       # Download the figures as SVGs
-      output$save_lp <- downloadHandler(filename = "Lollipop_Plot.svg",
-                                        content = function(file){
-                                          writeLines(lollipopreactive_tar()$x$html, con = file)})
-      output$save_rp_all <- downloadHandler(filename = "Radar_Plot_All.svg", 
-                                            content = function(file){
-                                              writeLines(radreactive_all()$x$html, con = file)})
-      output$save_rp1 <- downloadHandler(filename = "Radar_Plot_Organisation.svg",
-                                         content = function(file){
-                                           writeLines(radreactive_1()$x$html, con = file)})
-      output$save_rp2 <- downloadHandler(filename = "Radar_Plot_Operation.svg",
-                                         content = function(file){
-                                           writeLines(radreactive_2()$x$html, con = file)})
-      output$save_rp3 <- downloadHandler(filename = "Radar_Plot_Impact.svg",
-                                         content = function(file){
-                                           writeLines(radreactive_3()$x$html, con = file)})
+      output$save_lp <- downloadHandler(filename = "Lollipop_Plot.svg", content = function(file){writeLines(lollipopreactive_tar()$x$html, con = file)})
+      output$save_rp_all <- downloadHandler(filename = "Radar_Plot_All.svg", content = function(file){writeLines(radreactive_all()$x$html, con = file)})
+      output$save_rp1 <- downloadHandler(filename = "Radar_Plot_Organisation.svg", content = function(file){writeLines(radreactive_1()$x$html, con = file)})
+      output$save_rp2 <- downloadHandler(filename = "Radar_Plot_Operation.svg", content = function(file){writeLines(radreactive_2()$x$html, con = file)})
+      output$save_rp3 <- downloadHandler(filename = "Radar_Plot_Impact.svg", content = function(file){writeLines(radreactive_3()$x$html, con = file)})
 
       #generate automatic report , from https://shiny.rstudio.com/articles/generating-reports.html
       output$report <- downloadHandler(
