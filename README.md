@@ -5,7 +5,13 @@
 # OH-EpiCap
 **OH-EpiCap Tool: Evaluation tool for One Health Epidemiological Surveillance Capacities and Capabilities**.
 
-Link to the web version of the tool: [https://freddietafreeth.shinyapps.io/OH-EpiCap/](https://freddietafreeth.shinyapps.io/OH-EpiCap/). This repository contains the code for the OH-EpiCap Tool, developed published in Frontiers: Tegegne, H. A., Bogaardt, C., Collineau, L., Cazeau, G., Lailler, R., Reinhardt, J., **Freeth, F. T.**, Taylor, E., Prada, J. M., &amp; Hénaux, V. (2023). OH-EpiCap: A semi-quantitative tool for the evaluation of one health epidemiological surveillance capacities and capabilities. Frontiers in Public Health, 11. https://doi.org/10.3389/fpubh.2023.1053986 
+Link to the web version of the tool: [https://freddietafreeth.shinyapps.io/OH-EpiCap/](https://freddietafreeth.shinyapps.io/OH-EpiCap/). This repository contains the code for the OH-EpiCap Tool, developed published in Frontiers, by Henok Ayalew Tegegne<sup>1</sup>, Carlijn Bogaardt<sup>2</sup>, Lucie Collineau<sup>1</sup>, Géraldine Cazeau<sup>1</sup>, Renaud Lailler<sup>3</sup>, Johana Reinhardt<sup>1</sup>, **Frederick T. A. Freeth**<sup>2</sup>, Emma Taylor<sup>2</sup>, Joaquin M. Prada<sup>2</sup>, and Viviane Hénaux<sup>1</sup>. (2023). OH-EpiCap: A semi-quantitative tool for the evaluation of one health epidemiological surveillance capacities and capabilities. Frontiers in Public Health, 11. https://doi.org/10.3389/fpubh.2023.1053986.
+
+<sup>1</sup> University of Lyon - Agence Nationale de Sécurité Sanitaire de L'Alimentation, de L'Environnement et du Travail (ANSES), Laboratory of Lyon, Epidemiology and Support to Surveillance Unit, Lyon, France
+
+<sup>2</sup> School of Veterinary Medicine, Faculty of Health and Medical Sciences, University of Surrey, Guildford, United Kingdom
+
+<sup>3</sup> University of Paris Est - Agence Nationale de Sécurité Sanitaire de L'Alimentation, de L'Environnement et du Travail (ANSES), Laboratory for Food Safety, Maisons-Alfort, France
 
 The OH-EpiCap tool aims to develop system-specific profiles of (potential) surveillance interoperability between sectors, highlighting both strengths and gaps in surveillance capacities and capabilities. 
 
