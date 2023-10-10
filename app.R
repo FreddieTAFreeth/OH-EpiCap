@@ -56,8 +56,9 @@ ui <- dashboardPage(
             menuItem("Results", tabName = "results", icon = icon("chart-pie")),
             menuItem("Create Benchmark File", tabName = "createBenchmark", icon = icon("tools")),
             menuItem("Benchmark", tabName = "benchmark", icon = icon("copy")),
-            menuItem("Glossary", tabName = "glossary", icon = icon("book")),
+            menuItem("Glossary", tabName = "glossary", icon = icon("newspaper")),
             menuItem("Legal Information", tabName = "legal", icon=icon("gavel")),
+            menuItem("Publications", tabName = "publications", icon=icon("book")),
             box(width = 12, solidHeader = TRUE, status = "danger", collapsible = FALSE, background = "red", height="auto",
                 title = "Important Disclaimer:",
                 p("Please see the Legal page for information relating to the management and processing of the data entered in this app.")
@@ -191,6 +192,8 @@ ui <- dashboardPage(
                     ),
                     br(),
                     p("The OH-EpiCap tool has been developed by the MATRIX consortium, an integrative project funded by the One Health European Joint Programme. The MATRIX consortium aims to advance the implementation of OHS in practice by building onto existing resources, adding value to them and creating synergies among the sectors at the national level.  One activity has been the development of the generic benchmarking tool presented here, for characterizing, monitoring and evaluating epidemiological surveillance capacities and capabilities, which directly contribute to OHS. The tool aims to identify and describe the collaborations among actors involved in the surveillance of a hazard and to characterize the OH-ness of the surveillance system. The tool will support identification of areas that could lead to improvements in existing OH surveillance capacities. "),
+                    h2("OH-EpiCap Tool Publication"),
+                    p("The OH-EpiCap tool was published in Frontiers in Public Health by Henok Ayalew Tegegne, Carlijn Bogaardt, Lucie Collineau, Géraldine Cazeau, Renaud Lailler, Johana Reinhardt, Frederick T. A. Freeth, Emma Taylor, Joaquin M. Prada, and Viviane Hénaux. (2023). OH-EpiCap: A semi-quantitative tool for the evaluation of one health epidemiological surveillance capacities and capabilities. Frontiers in Public Health, 11.", tags$a("https://doi.org/10.3389/fpubh.2023.1053986", href="https://doi.org/10.3389/fpubh.2023.1053986"), "please see the Publications tab to view other published works using the OH-EpiCap tool."),
                     br(),
                     p("The OH-EpiCap tool is split into three Dimensions:"),
                     tags$ul(
@@ -326,6 +329,17 @@ ui <- dashboardPage(
                     ),
                     h2("Data Management and Privacy"),
                     p("To comply with the European General Data Protection Regulation (GDPR), the OH-EpiCap team does not collect any data through the application, and the application does not ask any personal or identifying information regarding users or the surveillance system under evaluation. The application is hosted in the cloud with",tags$a("shinyapps.io",href="https://www.shinyapps.io"),"and questionnaire and benchmark data(files) are processed and temporarily stored on an external server for the duration of the user's session only. All data remain inaccessible to other users of the app. In cases where evaluating surveilliance systems using the online version of the tool is not appropriate, users are able to locally run the project either by downloading and running the files in", tags$a("Frederick T. A. Freeth's OH-EpiCap Tool GitHub Repository", href="https://github.com/FreddieTAFreeth/OH-EpiCap"), "in RStudio, or to run the standalone downloadable app availiable in the repository.")
+            ),
+            tabItem(tabName = "publications",
+                    h2("Publications and Scientific Works Using the OH-EpiCap Tool"),
+                    tags$ol(style = "text-align:left!important",
+                      tags$li("Henok Ayalew Tegegne, Carlijn Bogaardt, Lucie Collineau, Géraldine Cazeau, Renaud Lailler, Johana Reinhardt, Frederick T. A. Freeth, Emma Taylor, Joaquin M. Prada, and Viviane Hénaux. (2023). OH-EpiCap: A semi-quantitative tool for the evaluation of one health epidemiological surveillance capacities and capabilities.", em("Frontiers in Public Health,"),"11.", tags$a("https://doi.org/10.3389/fpubh.2023.1053986", href="https://doi.org/10.3389/fpubh.2023.1053986")),
+                      tags$li("Moura, P., Collineau, L., Sandberg, M., Tomassone, L., De Meneghi, D., Norström, M., ... & Alban, L. (2023). Users’ perception of the OH-EpiCap evaluation tool based on its application to nine national antimicrobial resistance surveillance systems.", em("Frontiers in Public Health,"),"11, 1138645.", tags$a("https://doi.org/10.3389/fpubh.2023.1138645", href="https://doi.org/10.3389/fpubh.2023.1053986")),
+                      tags$li("Norström, M., Simonsen, G. S., Slettemeås, J. S., Furberg, A. S., & Urdahl, A. M. (2023). Evaluation of the One Health-Ness of 20 Years of Antimicrobial Resistance Surveillance in Norway.", em("Antibiotics,"), "12(7), 1080.", tags$a("https://doi.org/10.3390/antibiotics12071080", href="https://doi.org/10.3390/antibiotics12071080")),
+                      tags$li("Alban, L., Bordier, M., Häsler, B., Collineau, L., Tomassone, L., Bennani, H., ... & Sandberg, M. (2023). Capturing systematically users' experience of evaluation tools for integrated AMU and AMR surveillance.", em("Frontiers in Veterinary Science,"),"10, 1107122.", tags$a("https://doi.org/10.3389/fvets.2023.1107122", href="https://doi.org/10.3389/fvets.2023.1107122")),
+                      tags$li("Alves, F., Artursson, K., Bloch, J., Brisabois, A., Imberechts, H., Jokelainen, P., ... & Omazic, A. (2023). A multi-country One Health foodborne outbreak simulation exercise: cross-sectoral cooperation, data sharing and communication.", em("Frontiers in Public Health"), "11, 1121522.", tags$a("https://doi.org/10.3389/fpubh.2023.1121522", href="https://doi.org/10.3389/fpubh.2023.1121522")),
+                      tags$li("Rivers, S., Kochanowski, M., Stolarek, A., Ziętek-Barszcz, A., Horigan, V., Kent, A. J., & Dewar, R. (2023). A framework for the design, implementation, and evaluation of output-based surveillance systems against zoonotic threats.", em("Frontiers in Public Health"), "11, 1129776.", tags$a("https://doi.org/10.3389/fpubh.2023.1129776", href="https://doi.org/10.3389/fpubh.2023.1129776"))
+                    )
             )
         )
     )
