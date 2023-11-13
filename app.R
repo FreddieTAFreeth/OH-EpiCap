@@ -72,6 +72,9 @@ ui <- dashboardPage(
       tags$style(type="text/css", "
             
           /* Use OHEJP font and justify the text */
+          @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+          * {font-family: Open Sans, Arial, Helvetica, sans-serif;}
+          
           body{
               text-align: justify;
               font-size: 16px;
