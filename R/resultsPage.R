@@ -18,7 +18,7 @@ resultsOutput <- function(id, label = "results") {
               p("OH-EpiCap and Dimension indices represent mean scores over all questions, expressed as a percentage."),
               #textOutput(ns("restxt_overall")),
               fluidRow(column(4),
-                       gaugeOutput(ns("indexGauge")),
+                       column(4,gaugeOutput(ns("indexGauge"))),
                        column(4)),
               fluidRow(column(4,gaugeOutput(ns("organizationGauge"))),
                        column(4,gaugeOutput(ns("operationsGauge"))),
