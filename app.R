@@ -223,7 +223,7 @@ ui <- dashboardPage(
                       tags$li("Manual completion of the questionnaire,"),
                       tags$li("Uploading pre-saved answers from a .csv file.")
                     ),
-                    p("Note: to see the results and analysis of your surveillance capacity and capabilities, you must complete all questions of the questionnaire. Furthermore, for an in-depth tutorial, download the full OH-EpiCap tool guide here:", tags$a("The OH-EpiCap Tool Guide", href="OH-EpiCap_User guide_2022_06-03.pdf"),". Furthermore, the tool does not save your work automatically. Therefore, please ensure that your work is saved locally before closing the window."), 
+                    p("Note: to see the results and analysis of your surveillance capacity and capabilities, you must complete all questions of the questionnaire. Furthermore, for an in-depth tutorial, download the full OH-EpiCap tool guide here:", tags$a("The OH-EpiCap Tool Guide", href="OH-EpiCap_User guide_2024-04-30.pdf"),". Furthermore, the tool does not save your work automatically. Therefore, please ensure that your work is saved locally before closing the window."), 
                     box(
                       width = 12, status = "primary", collapsible = FALSE, solidHeader = TRUE,
                       title = "Manual Completion of the Questionnaire",
