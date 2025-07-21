@@ -104,7 +104,7 @@ questionnaire2Commands <- function(questionnaire) {
   questionnaire <- within(questionnaire,Notes<-paste0('list(tags$i("',gsub("\r\n",'",br(),"',Notes),'"))'))
   questionnaire <- within(questionnaire,Target<-paste0('list(id=paste0("T","',str_match(Target,"\\d\\.\\d"),'"),h3("',Target,'"))'))
   #Add option to comment (textInput) for each indicator
-  questionnaire <- within(questionnaire,Comment_box<-paste0('list(inputId = "C',ID,'", label = NULL, placeholder = "Type here any comments to supplement your answer", width = "100%")'))
+  questionnaire <- within(questionnaire,Comment_box<-paste0('list(inputId = "C',ID,'", label = NULL, placeholder = "Type here any comments to supplement your answer. Please avoid using special/complex accented characters.", width = "100%")'))
   
   #Make commands df: Extract Indicator, Question and Rb_args columns; rename cols; turn into "long matrix" format
   #Also extracts Dimension column, but keeps this out of the longmatrix format, to facilitate filtering
