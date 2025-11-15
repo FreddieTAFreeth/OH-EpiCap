@@ -15,6 +15,7 @@ library(ggiraph)
 library(ggmulti)
 library(bslib)
 library(data.table)
+library(readr)
 
 # Change encoding to UTF-8
 options(encoding="UTF-8") 
