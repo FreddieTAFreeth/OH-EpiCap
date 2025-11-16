@@ -194,8 +194,7 @@ ui <- dashboardPage(
                     br(),
                     box(status="danger", width = 12, title = "Disclaimer:", solidHeader = TRUE, 
                       p("Here we present a functional 'beta' version of the tool, that is still under development. Therefore, expect placeholder text in some areas and a work-in-progress user interface.",
-                      tags$b("Please note that this version of the OH-EpiCap tool times out after 60 min of inactivity."), "To avoid data loss, you must save your data regularly using the 'Save answers to file' option."),
-                      p(tags$b("Note:"), "In text-based fields, please avoid using special or complex accented characters.")
+                      tags$b("Please note that this version of the OH-EpiCap tool times out after 60 min of inactivity."), "To avoid data loss, you must save your data regularly using the 'Save answers to file' option.")
                     ),
                     br(),
                     p("The OH-EpiCap tool has been developed by the MATRIX consortium, an integrative project funded by the One Health European Joint Programme. The MATRIX consortium aims to advance the implementation of OHS in practice by building onto existing resources, adding value to them and creating synergies among the sectors at the national level.  One activity has been the development of the generic benchmarking tool presented here, for characterizing, monitoring and evaluating epidemiological surveillance capacities and capabilities, which directly contribute to OHS. The tool aims to identify and describe the collaborations among actors involved in the surveillance of a hazard and to characterize the OH-ness of the surveillance system. The tool will support identification of areas that could lead to improvements in existing OH surveillance capacities. "),
