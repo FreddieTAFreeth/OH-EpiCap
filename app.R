@@ -16,6 +16,8 @@ library(ggmulti)
 library(bslib)
 library(data.table)
 library(readr)
+library(dplyr)
+library(purrr)
 
 # Change encoding to UTF-8
 options(encoding="UTF-8") 
