@@ -51,19 +51,17 @@ scoringTable <- function(questionnaire_w_values, level, reference = FALSE) {
       mutate(variable = Indicators,
              value = Chosen_value,
              x=rep(c(seq(9,81,24),seq(99,171,24),seq(189,261,24),seq(279,351,24)),3),
-             tooltip = paste0(
-               "Score: ", Chosen_value, ". ",
-               map2_chr(Options, Chosen_value,
-                        ~ sub("^\\d+\\.\\s*", "", .x[.y])
-               ),
-               "\n",
-               # only add the comment block when Comment is non‑missing and non‑empty
-               ifelse(!is.na(Comment) & Comment != "", Comment, "")
-             ),
-      
-             # tooltip = ifelse(reference == FALSE,
-             #                 paste0(str_match(Options, paste(Chosen_value, '\\. *([^"]+)\\"',sep=''))[,2],'\n', Comment),
-             #                 "sample tooltip for benchmark ref dataset"),
+             tooltip = if (reference) {
+                 "sample tooltip for benchmark ref dataset"
+               } else {
+                 paste0(
+                   "Score: ", Chosen_value, ". ",
+                   map2_chr(Options, Chosen_value,
+                            ~ sub("^\\d+\\.\\s*", "", .x[.y])),
+                   "\n",
+                   ifelse(!is.na(Comment) & Comment != "", Comment, "")
+                 )
+               },
              colour = Colour
       )
     if(reference == FALSE){
